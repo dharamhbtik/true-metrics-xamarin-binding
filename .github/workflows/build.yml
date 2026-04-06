@@ -37,24 +37,24 @@ jobs:
     - name: Install Mono (includes MSBuild)
       run: |
         brew install mono
-        source ~/.bash_profile || true
-        source ~/.bashrc || true
-        echo "/Library/Frameworks/Mono.framework/Versions/Current/bin" >> $GITHUB_PATH
+        # Homebrew Mono puts binaries in /opt/homebrew/bin
+        ls -la /opt/homebrew/bin/msbuild || true
+        echo "/opt/homebrew/bin" >> $GITHUB_PATH
         
     - name: Restore packages with MSBuild
       run: |
-        /Library/Frameworks/Mono.framework/Versions/Current/bin/msbuild TrueMetrics.Xamarin.sln /t:Restore /p:Configuration=Release
+        /opt/homebrew/bin/msbuild TrueMetrics.Xamarin.sln /t:Restore /p:Configuration=Release
         
     - name: Build project
       run: |
-        /Library/Frameworks/Mono.framework/Versions/Current/bin/msbuild TrueMetrics.Xamarin.Android/TrueMetrics.Xamarin.Android.csproj \
+        /opt/homebrew/bin/msbuild TrueMetrics.Xamarin.Android/TrueMetrics.Xamarin.Android.csproj \
           /p:Configuration=Release \
           /p:TargetFrameworkVersion=v13.0 \
           /p:PackageVersion=${{ env.PACKAGE_VERSION }}
           
     - name: Pack NuGet package with MSBuild
       run: |
-        /Library/Frameworks/Mono.framework/Versions/Current/bin/msbuild TrueMetrics.Xamarin.Android/TrueMetrics.Xamarin.Android.csproj \
+        /opt/homebrew/bin/msbuild TrueMetrics.Xamarin.Android/TrueMetrics.Xamarin.Android.csproj \
           /t:Pack \
           /p:Configuration=Release \
           /p:PackageVersion=${{ env.PACKAGE_VERSION }} \

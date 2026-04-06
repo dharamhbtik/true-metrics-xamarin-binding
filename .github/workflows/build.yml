@@ -37,13 +37,25 @@ jobs:
     - name: Install Mono (includes MSBuild)
       run: |
         brew install mono
-        # Homebrew Mono puts binaries in /opt/homebrew/bin
-        ls -la /opt/homebrew/bin/msbuild || true
-        echo "/opt/homebrew/bin" >> $GITHUB_PATH
+        # Find where msbuild is actually installed
+        echo "Searching for msbuild..."
+        which msbuild || true
+        find /opt/homebrew -name "msbuild" 2>/dev/null || true
+        find /usr/local -name "msbuild" 2>/dev/null || true
+        ls -la /opt/homebrew/bin/ | grep -i mono || true
+        ls -la /usr/local/bin/ | grep -i mono || true
+        
+    - name: Setup MSBuild environment
+      run: |
+        # Export msbuild path to environment
+        MSBUILD_PATH=$(which msbuild 2>/dev/null || find /opt/homebrew -name "msbuild" 2>/dev/null | head -1 || find /usr/local -name "msbuild" 2>/dev/null | head -1 || echo "/opt/homebrew/bin/msbuild")
+        echo "MSBUILD_PATH=$MSBUILD_PATH" >> $GITHUB_ENV
+        echo "Using MSBuild at: $MSBUILD_PATH"
+        $MSBUILD_PATH --version || true
         
     - name: Restore packages with MSBuild
       run: |
-        /opt/homebrew/bin/msbuild TrueMetrics.Xamarin.sln /t:Restore /p:Configuration=Release
+        ${{ env.MSBUILD_PATH }} TrueMetrics.Xamarin.sln /t:Restore /p:Configuration=Release
         
     - name: Build project
       run: |

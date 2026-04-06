@@ -8,6 +8,9 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+env:
+  PACKAGE_VERSION: '1.5.4'
+
 jobs:
   build:
     runs-on: macos-latest
@@ -21,37 +24,34 @@ jobs:
       with:
         dotnet-version: '8.0.x'
         
-    - name: Setup NuGet
-      uses: nuget/setup-nuget@v2
-      with:
-        nuget-version: 'latest'
-        
     - name: Setup Java
       uses: actions/setup-java@v4
       with:
         java-version: '11'
         distribution: 'microsoft'
         
-    - name: Install Xamarin.Android
+    - name: Install Xamarin.Android workloads
       run: |
         sudo dotnet workload install android
         
-    - name: Restore NuGet packages
+    - name: Restore packages with MSBuild
       run: |
-        nuget restore TrueMetrics.Xamarin.sln
+        msbuild TrueMetrics.Xamarin.sln /t:Restore /p:Configuration=Release
         
     - name: Build project
       run: |
         msbuild TrueMetrics.Xamarin.Android/TrueMetrics.Xamarin.Android.csproj \
           /p:Configuration=Release \
           /p:TargetFrameworkVersion=v13.0 \
-          /restore
+          /p:PackageVersion=${{ env.PACKAGE_VERSION }}
           
-    - name: Pack NuGet package
+    - name: Pack NuGet package with MSBuild
       run: |
-        nuget pack TrueMetrics.Xamarin.Android/TrueMetrics.Xamarin.Android.nuspec \
-          -OutputDirectory TrueMetrics.Xamarin.Android/bin/Release \
-          -Version ${{ github.ref_name == 'main' && '1.5.3' || github.ref_name }}
+        msbuild TrueMetrics.Xamarin.Android/TrueMetrics.Xamarin.Android.csproj \
+          /t:Pack \
+          /p:Configuration=Release \
+          /p:PackageVersion=${{ env.PACKAGE_VERSION }} \
+          /p:NuspecFile=TrueMetrics.Xamarin.Android.nuspec
           
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
@@ -74,11 +74,9 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
     - name: Publish to NuGet.org (optional)
-      if: startsWith(github.ref, 'refs/tags/v') && env.NUGET_API_KEY != ''
+      if: startsWith(github.ref, 'refs/tags/v') && secrets.NUGET_API_KEY != ''
       run: |
-        nuget push TrueMetrics.Xamarin.Android/bin/Release/*.nupkg \
-          -ApiKey ${{ secrets.NUGET_API_KEY }} \
-          -Source https://api.nuget.org/v3/index.json \
-          -SkipDuplicate
-      env:
-        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        dotnet nuget push TrueMetrics.Xamarin.Android/bin/Release/*.nupkg \
+          --api-key ${{ secrets.NUGET_API_KEY }} \
+          --source https://api.nuget.org/v3/index.json \
+          --skip-duplicate

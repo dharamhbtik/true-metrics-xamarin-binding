@@ -6,7 +6,6 @@ using Android.Graphics;
 using Android.OS;
 using AndroidX.Core.App;
 using IO.Truemetrics.Truemetricssdk.Engine.Stats;
-using IO.Truemetrics.Truemetricssdk.Notification;
 
 namespace TrueMetrics.Xamarin.Android
 {
@@ -101,19 +100,15 @@ namespace TrueMetrics.Xamarin.Android
                     // Create notification channel first (required for Android O+)
                     TrueMetricsNotificationHelper.CreateNotificationChannel(context);
 
-                    // Create notification factory with custom or default settings
-                    var iconId = smallIconResId != 0 ? smallIconResId : Android.Resource.Drawable.IcMediaPlay;
-                    var factory = new TrueMetricsNotificationFactory(
+                    // Create notification builder (can be used later when starting foreground service)
+                    var iconId = smallIconResId != 0 ? smallIconResId : global::Android.Resource.Drawable.IcMediaPlay;
+                    var notificationBuilder = new TrueMetricsNotificationBuilder(
                         notificationTitle, 
                         notificationContent, 
                         iconId);
 
-                    // Build configuration with notification factory
-                    var builder = new Config.SdkConfiguration.Builder(apiKey);
-                    
-                    // Use reflection or set the factory if the API supports it
-                    // Note: The actual method depends on the SDK's API surface
-                    var config = builder.Build();
+                    // Build configuration with API key
+                    var config = new Config.SdkConfiguration.Builder(apiKey).Build();
                     
                     TruemetricsSdk.Init(context.ApplicationContext, config);
                     _instance = TruemetricsSdk.Instance;
@@ -510,10 +505,10 @@ namespace TrueMetrics.Xamarin.Android
     }
 
     /// <summary>
-    /// Persistent notification factory for TrueMetrics SDK foreground service.
+    /// Persistent notification builder for TrueMetrics SDK foreground service.
     /// Creates a non-dismissible notification that keeps the service running in background.
     /// </summary>
-    public class TrueMetricsNotificationFactory : Java.Lang.Object, IForegroundNotificationFactory
+    public class TrueMetricsNotificationBuilder
     {
         public const string ChannelId = "truemetrics_recording_channel";
         public const string ChannelName = "TrueMetrics Recording";
@@ -524,22 +519,23 @@ namespace TrueMetrics.Xamarin.Android
         private readonly int _smallIconResId;
 
         /// <summary>
-        /// Creates a default notification factory with standard messages.
+        /// Creates a default notification builder with standard messages.
+        /// Note: You must provide a valid icon resource ID when building the notification.
         /// </summary>
-        public TrueMetricsNotificationFactory()
+        public TrueMetricsNotificationBuilder()
         {
             _title = "Recording in Progress";
             _content = "TrueMetrics is collecting sensor data";
-            _smallIconResId = Android.Resource.Drawable.IcMediaPlay;
+            _smallIconResId = 0; // User must provide valid icon resource
         }
 
         /// <summary>
-        /// Creates a custom notification factory.
+        /// Creates a custom notification builder.
         /// </summary>
         /// <param name="title">Notification title</param>
         /// <param name="content">Notification content text</param>
         /// <param name="smallIconResId">Resource ID for small icon (use Android.Resource.Drawable or your own)</param>
-        public TrueMetricsNotificationFactory(string title, string content, int smallIconResId)
+        public TrueMetricsNotificationBuilder(string title, string content, int smallIconResId)
         {
             _title = title ?? "Recording in Progress";
             _content = content ?? "TrueMetrics is collecting sensor data";
@@ -548,8 +544,9 @@ namespace TrueMetrics.Xamarin.Android
 
         /// <summary>
         /// Creates the persistent notification for the foreground service.
+        /// Call this before starting recording to get a notification to pass to the service.
         /// </summary>
-        public Notification CreateNotification(Context context)
+        public Notification BuildNotification(Context context)
         {
             if (context == null)
                 throw new ArgumentNullException(nameof(context));
@@ -568,11 +565,7 @@ namespace TrueMetrics.Xamarin.Android
                 .SetCategory(NotificationCompat.CategoryService)   // Service notification
                 .SetVisibility(NotificationCompat.VisibilityPublic) // Show on lock screen
                 .SetShowWhen(true)                                   // Show timestamp
-                .SetWhen(Java.Lang.System.CurrentTimeMillis());
-
-            // Add action button to stop recording (optional)
-            // Note: This requires setting up a broadcast receiver in your app
-            // builder.AddAction(Android.Resource.Drawable.IcMediaPause, "Stop", pendingIntent);
+                .SetWhen(Java.Lang.JavaSystem.CurrentTimeMillis());
 
             return builder.Build();
         }
@@ -617,8 +610,8 @@ namespace TrueMetrics.Xamarin.Android
                 return;
 
             var channel = new NotificationChannel(
-                TrueMetricsNotificationFactory.ChannelId,
-                TrueMetricsNotificationFactory.ChannelName,
+                TrueMetricsNotificationBuilder.ChannelId,
+                TrueMetricsNotificationBuilder.ChannelName,
                 NotificationImportance.Low)
             {
                 Description = "TrueMetrics background recording service"
@@ -641,7 +634,16 @@ namespace TrueMetrics.Xamarin.Android
                 return;
 
             var notificationManager = NotificationManager.FromContext(context);
-            notificationManager?.DeleteNotificationChannel(TrueMetricsNotificationFactory.ChannelId);
+            notificationManager?.DeleteNotificationChannel(TrueMetricsNotificationBuilder.ChannelId);
+        }
+
+        /// <summary>
+        /// Builds a persistent notification for the foreground service.
+        /// </summary>
+        public static Notification BuildPersistentNotification(Context context, string title = null, string content = null, int iconResId = 0)
+        {
+            var builder = new TrueMetricsNotificationBuilder(title, content, iconResId);
+            return builder.BuildNotification(context);
         }
     }
 }

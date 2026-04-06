@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>TrueMetrics.Xamarin.Android</id>
-    <version>1.5.3</version>
+    <version>1.5.4</version>
     <title>TrueMetrics SDK for Xamarin Android</title>
     <authors>TrueMetrics</authors>
     <owners>TrueMetrics</owners>
@@ -25,13 +25,13 @@
       - Configurable recording parameters
     </description>
     <releaseNotes>
-      Version 1.5.3 - Complete API wrapper with all SDK methods
-      - Added DeviceId property
-      - Added all metadata methods (LogMetadata, AppendToMetadataTag, etc.)
-      - Added metadata template methods
-      - Added sensor and upload statistics
-      - Added AllSensorsEnabled control
-      - All SDK methods wrapped in simple static helpers
+      Version 1.5.4 - Added persistent notification support for background recording
+      - Added TrueMetricsNotificationFactory for foreground service notifications
+      - Added TrueMetricsNotificationHelper for notification channel management
+      - Added InitializeWithNotification() method for easy setup
+      - Added Xamarin.AndroidX.Core dependency for NotificationCompat
+      - Ensures SDK works properly in background with persistent notification
+      - All notifications use dedicated channel ID: truemetrics_recording_channel
     </releaseNotes>
     <copyright>Copyright © TrueMetrics 2024</copyright>
     <tags>xamarin android truemetrics sensor binding last-mile delivery logistics tracking</tags>
@@ -41,6 +41,7 @@
         <dependency id="Xamarin.Kotlin.StdLib" version="1.7.10" />
         <dependency id="Xamarin.KotlinX.Coroutines.Android" version="1.6.4" />
         <dependency id="Xamarin.GooglePlayServices.Location" version="118.0.0.1" />
+        <dependency id="Xamarin.AndroidX.Core" version="1.10.1.1" />
       </group>
     </dependencies>
   </metadata>

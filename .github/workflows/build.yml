@@ -40,7 +40,6 @@ jobs:
         source ~/.bash_profile || true
         source ~/.bashrc || true
         echo "/Library/Frameworks/Mono.framework/Versions/Current/bin" >> $GITHUB_PATH
-        echo "/Library/Frameworks/Mono.framework/Versions/Current/bin" >> $GITHUB_ENV
         
     - name: Restore packages with MSBuild
       run: |

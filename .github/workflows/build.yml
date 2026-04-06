@@ -34,6 +34,11 @@ jobs:
       run: |
         sudo dotnet workload install android
         
+    - name: Install Mono (includes MSBuild)
+      run: |
+        brew install mono
+        echo "/Library/Frameworks/Mono.framework/Versions/Current/bin" >> $GITHUB_PATH
+        
     - name: Restore packages with MSBuild
       run: |
         msbuild TrueMetrics.Xamarin.sln /t:Restore /p:Configuration=Release

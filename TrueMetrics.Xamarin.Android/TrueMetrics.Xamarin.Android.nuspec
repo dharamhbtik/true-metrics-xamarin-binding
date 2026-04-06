@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>TrueMetrics.Xamarin.Android</id>
+    <version>1.5.3</version>
+    <title>TrueMetrics SDK for Xamarin Android</title>
+    <authors>TrueMetrics</authors>
+    <owners>TrueMetrics</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/TRUE-Metrics-io/truemetrics_android_SDK</projectUrl>
+    <repository type="git" url="https://github.com/TRUE-Metrics-io/truemetrics_android_SDK" />
+    <description>
+      Xamarin.Android binding for TrueMetrics SDK 1.5.0 — sensor data collection for last-mile delivery applications.
+      
+      This package provides a C# binding for the native Android TrueMetrics SDK, enabling Xamarin.Forms and .NET MAUI 
+      applications to integrate sensor-based data collection for delivery tracking and logistics optimization.
+      
+      Key Features:
+      - Automatic sensor data collection (GPS, accelerometer, gyroscope, barometer)
+      - Background recording with foreground service
+      - Automatic data compression and upload
+      - Real-time sensor status monitoring
+      - Encrypted local data storage
+      - Configurable recording parameters
+    </description>
+    <releaseNotes>
+      Version 1.5.3 - Complete API wrapper with all SDK methods
+      - Added DeviceId property
+      - Added all metadata methods (LogMetadata, AppendToMetadataTag, etc.)
+      - Added metadata template methods
+      - Added sensor and upload statistics
+      - Added AllSensorsEnabled control
+      - All SDK methods wrapped in simple static helpers
+    </releaseNotes>
+    <copyright>Copyright © TrueMetrics 2024</copyright>
+    <tags>xamarin android truemetrics sensor binding last-mile delivery logistics tracking</tags>
+    <dependencies>
+      <group targetFramework="monoandroid13.0">
+        <!-- Minimal dependencies - SDK embeds Kotlin and AndroidX libraries internally -->
+        <dependency id="Xamarin.Kotlin.StdLib" version="1.7.10" />
+        <dependency id="Xamarin.KotlinX.Coroutines.Android" version="1.6.4" />
+        <dependency id="Xamarin.GooglePlayServices.Location" version="118.0.0.1" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <!-- Reference assemblies -->
+    <file src="bin\Release\TrueMetrics.Xamarin.Android.dll" target="lib\monoandroid13.0" />
+    <file src="bin\Release\TrueMetrics.Xamarin.Android.xml" target="lib\monoandroid13.0" />
+    
+    <!-- Documentation -->
+    <file src="..\README.md" target="docs" />
+  </files>
+</package>

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <!-- 
+    TrueMetrics SDK 1.5.0 Xamarin.Android Binding Metadata
+    
+    This file contains transforms to properly bind the Kotlin-based TrueMetrics SDK
+    for use in Xamarin.Android applications.
+  -->
+
+  <!-- ============================================================ -->
+  <!-- SECTION 1: Namespace Mapping -->
+  <!-- ============================================================ -->
+  
+  <!-- Map Java package to C# namespace -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']" name="managedName">TrueMetrics.Xamarin.Android</attr>
+  
+  <!-- Sub-package mappings -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.data']" name="managedName">TrueMetrics.Xamarin.Android.Data</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.data.local']" name="managedName">TrueMetrics.Xamarin.Android.Data.Local</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.data.local.entities']" name="managedName">TrueMetrics.Xamarin.Android.Data.Local.Entities</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.data.local.dao']" name="managedName">TrueMetrics.Xamarin.Android.Data.Local.Dao</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.data.remote']" name="managedName">TrueMetrics.Xamarin.Android.Data.Remote</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.data.remote.api']" name="managedName">TrueMetrics.Xamarin.Android.Data.Remote.Api</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.di']" name="managedName">TrueMetrics.Xamarin.Android.Di</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.domain']" name="managedName">TrueMetrics.Xamarin.Android.Domain</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.domain.usecase']" name="managedName">TrueMetrics.Xamarin.Android.Domain.UseCase</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.notification']" name="managedName">TrueMetrics.Xamarin.Android.Notification</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.recording']" name="managedName">TrueMetrics.Xamarin.Android.Recording</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.recording.sensors']" name="managedName">TrueMetrics.Xamarin.Android.Recording.Sensors</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.recording.service']" name="managedName">TrueMetrics.Xamarin.Android.Recording.Service</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.upload']" name="managedName">TrueMetrics.Xamarin.Android.Upload</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.upload.workers']" name="managedName">TrueMetrics.Xamarin.Android.Upload.Workers</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.utils']" name="managedName">TrueMetrics.Xamarin.Android.Utils</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.config']" name="managedName">TrueMetrics.Xamarin.Android.Config</attr>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2: Main SDK Class - TruemetricsSdk -->
+  <!-- ============================================================ -->
+  
+  <!-- Ensure TruemetricsSdk is public -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']" name="visibility">public</attr>
+  
+  <!-- Handle Kotlin Companion Object -->
+  <!-- Rename companion object to CompanionObject for C# compatibility -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/class[@name='Companion']" name="managedName">CompanionObject</attr>
+  
+  <!-- Ensure @JvmStatic methods from companion are properly bound as static -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/class[@name='Companion']/method[@name='init']" name="managedName">Init</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/class[@name='Companion']/method[@name='getInstance']" name="managedName">GetInstance</attr>
+  
+  <!-- Map Kotlin StateFlow properties to observable patterns -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/field[@name='status']" name="managedName">StatusFlow</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/field[@name='sensorInfo']" name="managedName">SensorInfoFlow</attr>
+  
+  <!-- ============================================================ -->
+  <!-- SECTION 3: SdkConfiguration and Builder -->
+  <!-- ============================================================ -->
+  
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.config']/class[@name='SdkConfiguration']" name="visibility">public</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.config']/class[@name='SdkConfiguration']/class[@name='Builder']" name="visibility">public</attr>
+  
+  <!-- ============================================================ -->
+  <!-- SECTION 4: Status Sealed Class Hierarchy -->
+  <!-- ============================================================ -->
+  
+  <!-- Main Status sealed class -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='Status']" name="visibility">public</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='Status']" name="managedName">StatusBase</attr>
+  
+  <!-- Status.Uninitialized -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='Status.Uninitialized']" name="managedName">StatusUninitialized</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='Status.Uninitialized']" name="visibility">public</attr>
+  
+  <!-- Status.Initialized -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='Status.Initialized']" name="managedName">StatusInitialized</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='Status.Initialized']" name="visibility">public</attr>
+  
+  <!-- Status.RecordingInProgress -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='Status.RecordingInProgress']" name="managedName">StatusRecordingInProgress</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='Status.RecordingInProgress']" name="visibility">public</attr>
+  
+  <!-- Status.RecordingStopped -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='Status.RecordingStopped']" name="managedName">StatusRecordingStopped</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='Status.RecordingStopped']" name="visibility">public</attr>
+  
+  <!-- Status.DelayedStart -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='Status.DelayedStart']" name="managedName">StatusDelayedStart</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='Status.DelayedStart']" name="visibility">public</attr>
+  
+  <!-- Status.TrafficLimitReached -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='Status.TrafficLimitReached']" name="managedName">StatusTrafficLimitReached</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='Status.TrafficLimitReached']" name="visibility">public</attr>
+  
+  <!-- Status.ReadingsDatabaseFull -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='Status.ReadingsDatabaseFull']" name="managedName">StatusReadingsDatabaseFull</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='Status.ReadingsDatabaseFull']" name="visibility">public</attr>
+  
+  <!-- Status.Error -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='Status.Error']" name="managedName">StatusError</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='Status.Error']" name="visibility">public</attr>
+  
+  <!-- Status.AskForPermissions -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='Status.AskForPermissions']" name="managedName">StatusAskForPermissions</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='Status.AskForPermissions']" name="visibility">public</attr>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 5: Data Classes -->
+  <!-- ============================================================ -->
+  
+  <!-- UploadStatistics -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.data']/class[@name='UploadStatistics']" name="visibility">public</attr>
+  
+  <!-- SensorStatistics -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.data']/class[@name='SensorStatistics']" name="visibility">public</attr>
+  
+  <!-- SensorInfo -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.data']/class[@name='SensorInfo']" name="visibility">public</attr>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 6: Enums -->
+  <!-- ============================================================ -->
+  
+  <!-- SensorName enum -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.recording.sensors']/enum[@name='SensorName']" name="visibility">public</attr>
+  
+  <!-- SensorStatus enum -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.recording.sensors']/enum[@name='SensorStatus']" name="visibility">public</attr>
+  
+  <!-- SensorDataQuality enum -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.recording.sensors']/enum[@name='SensorDataQuality']" name="visibility">public</attr>
+  
+  <!-- ErrorCode enum -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/enum[@name='ErrorCode']" name="visibility">public</attr>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 7: ForegroundNotificationFactory Interface -->
+  <!-- ============================================================ -->
+  
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.notification']/interface[@name='ForegroundNotificationFactory']" name="visibility">public</attr>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 8: Remove Internal/Non-Public API Surface -->
+  <!-- ============================================================ -->
+  
+  <!-- Remove internal Koin DI classes -->
+  <remove-node path="/api/package[@name='io.truemetrics.truemetricssdk.di']" />
+  
+  <!-- Remove internal data access objects -->
+  <remove-node path="/api/package[@name='io.truemetrics.truemetricssdk.data.local.dao']" />
+  
+  <!-- Remove internal Room database classes (keep only entities) -->
+  <remove-node path="/api/package[@name='io.truemetrics.truemetricssdk.data.local']/class[contains(@name,'Database')]" />
+  <remove-node path="/api/package[@name='io.truemetrics.truemetricssdk.data.local']/class[contains(@name,'Callback')]" />
+  
+  <!-- Remove internal Workers - These can cause Xamarin binding issues (see Section 10 pitfall #1) -->
+  <remove-node path="/api/package[@name='io.truemetrics.truemetricssdk.upload.workers']" />
+  <remove-node path="/api/package[@name='io.truemetrics.truemetricssdk.recording.service']" />
+  
+  <!-- Remove internal use cases -->
+  <remove-node path="/api/package[@name='io.truemetrics.truemetricssdk.domain.usecase']" />
+  
+  <!-- Remove internal remote API classes -->
+  <remove-node path="/api/package[@name='io.truemetrics.truemetricssdk.data.remote']" />
+  
+  <!-- Remove internal utility classes -->
+  <remove-node path="/api/package[@name='io.truemetrics.truemetricssdk.utils']" />
+  
+  <!-- Remove Upload.DI package that references non-existent Data namespace -->
+  <remove-node path="/api/package[@name='io.truemetrics.truemetricssdk.engine.upload.di']" />
+
+  <!-- ============================================================ -->
+  <!-- SECTION 9: Kotlin Coroutines/Flow Fixes -->
+  <!-- ============================================================ -->
+  
+  <!-- Remove Flow-related internal methods that can't be bound properly -->
+  <remove-node path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/method[contains(@name,'Flow') and not(contains(@name,'get'))]" />
+  
+  <!-- Ensure StateFlow getter methods are visible -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/method[@name='getStatus']" name="visibility">public</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/method[@name='getSensorInfo']" name="visibility">public</attr>
+  
+  <!-- Rename getStatus to GetStatusFlow to match renamed field -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/method[@name='getStatus']" name="managedName">GetStatusFlow</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/method[@name='getSensorInfo']" name="managedName">GetSensorInfoFlow</attr>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 10: Method Renames for C# Naming Conventions -->
+  <!-- ============================================================ -->
+  
+  <!-- TruemetricsSdk instance methods -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/method[@name='startRecording']" name="managedName">StartRecording</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/method[@name='stopRecording']" name="managedName">StopRecording</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/method[@name='isRecordingInProgress']" name="managedName">IsRecordingInProgress</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/method[@name='isRecordingStopped']" name="managedName">IsRecordingStopped</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/method[@name='getRecordingStartTime']" name="managedName">GetRecordingStartTime</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/method[@name='getDeviceId']" name="managedName">GetDeviceId</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/method[@name='logMetadata']" name="managedName">LogMetadata</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/method[@name='setAllSensorsEnabled']" name="managedName">SetAllSensorsEnabled</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/method[@name='getAllSensorsEnabled']" name="managedName">GetAllSensorsEnabled</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/method[@name='getActiveConfig']" name="managedName">GetActiveConfig</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/method[@name='getUploadStatistics']" name="managedName">GetUploadStatistics</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/method[@name='getSensorStatistics']" name="managedName">GetSensorStatistics</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/method[@name='deinitialize']" name="managedName">Deinitialize</attr>
+  
+  <!-- SdkConfiguration.Builder methods -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.config']/class[@name='SdkConfiguration']/class[@name='Builder']/method[@name='build']" name="managedName">Build</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.config']/class[@name='SdkConfiguration']/class[@name='Builder']/method[@name='setApiKey']" name="managedName">SetApiKey</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.config']/class[@name='SdkConfiguration']/class[@name='Builder']/method[@name='setNotificationFactory']" name="managedName">SetNotificationFactory</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.config']/class[@name='SdkConfiguration']/class[@name='Builder']/method[@name='setBaseUrl']" name="managedName">SetBaseUrl</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.config']/class[@name='SdkConfiguration']/class[@name='Builder']/method[@name='setLogLevel']" name="managedName">SetLogLevel</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.config']/class[@name='SdkConfiguration']/class[@name='Builder']/method[@name='setMaxRecordingDuration']" name="managedName">SetMaxRecordingDuration</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.config']/class[@name='SdkConfiguration']/class[@name='Builder']/method[@name='setUploadInterval']" name="managedName">SetUploadInterval</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.config']/class[@name='SdkConfiguration']/class[@name='Builder']/method[@name='enableCompression']" name="managedName">EnableCompression</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.config']/class[@name='SdkConfiguration']/class[@name='Builder']/method[@name='setForegroundNotificationEnabled']" name="managedName">SetForegroundNotificationEnabled</attr>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 11: Generic Type Parameter Fixes -->
+  <!-- ============================================================ -->
+  
+  <!-- Fix any generic type issues with StateFlow -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/method[@name='getStatus']/return" name="managedType">Java.Lang.Object</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/method[@name='getSensorInfo']/return" name="managedType">Java.Lang.Object</attr>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 12: Fix visibility for internal constructors -->
+  <!-- ============================================================ -->
+  
+  <!-- Ensure data classes have public constructors -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.data']/class[@name='UploadStatistics']/constructor" name="visibility">public</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.data']/class[@name='SensorStatistics']/constructor" name="visibility">public</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.data']/class[@name='SensorInfo']/constructor" name="visibility">public</attr>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 13: Remove conflicting Kotlin metadata -->
+  <!-- ============================================================ -->
+  
+  <!-- Remove internal Sentry classes that cause binding issues -->
+  <remove-node path="/api/package[contains(@name,'io.truemetrics.internal.sentry')]" />
+  <remove-node path="/api/package[contains(@name,'io.truemetrics.truemetricssdk.internal')]" />
+  <remove-node path="/api/package[contains(@name,'io.truemetrics.truemetricssdk.sentry')]" />
+  
+  <!-- Remove synthetic methods that cause conflicts -->
+  <remove-node path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/method[contains(@name,'-')]" />
+  <remove-node path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='Status']/method[contains(@name,'-')]" />
+
+</metadata>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<enum-method-mappings>
+  <!--
+    Enum Method Mappings for TrueMetrics SDK Xamarin Binding
+    
+    This file maps Java enum int constants to C# enums for method parameters and return types.
+  -->
+
+  <!-- SensorName enum mappings for any int-based method signatures -->
+  <mapping jni-class="io/truemetrics/truemetricssdk/recording/sensors/SensorName">
+    <method jni-name="valueOf" parameter="name" clr-enum-type="TrueMetrics.Xamarin.Android.Recording.Sensors.SensorName" />
+  </mapping>
+
+  <!-- SensorStatus enum mappings -->
+  <mapping jni-class="io/truemetrics/truemetricssdk/recording/sensors/SensorStatus">
+    <method jni-name="valueOf" parameter="name" clr-enum-type="TrueMetrics.Xamarin.Android.Recording.Sensors.SensorStatus" />
+  </mapping>
+
+  <!-- SensorDataQuality enum mappings -->
+  <mapping jni-class="io/truemetrics/truemetricssdk/recording/sensors/SensorDataQuality">
+    <method jni-name="valueOf" parameter="name" clr-enum-type="TrueMetrics.Xamarin.Android.Recording.Sensors.SensorDataQuality" />
+  </mapping>
+
+  <!-- ErrorCode enum mappings -->
+  <mapping jni-class="io/truemetrics/truemetricssdk/ErrorCode">
+    <method jni-name="valueOf" parameter="name" clr-enum-type="TrueMetrics.Xamarin.Android.ErrorCode" />
+  </mapping>
+
+  <!-- Status sealed class type mappings for any factory methods -->
+  <mapping jni-class="io/truemetrics/truemetricssdk/Status">
+    <method jni-name="values" parameter="" clr-enum-type="TrueMetrics.Xamarin.Android.StatusBase[]" />
+  </mapping>
+
+</enum-method-mappings>

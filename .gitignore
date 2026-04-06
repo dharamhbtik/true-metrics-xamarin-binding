@@ -1,0 +1,77 @@
+# Build outputs
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.mdb
+*.so
+*.dylib
+*.apk
+*.aab
+*.ipa
+
+# Visual Studio / VS Code
+.vs/
+.vscode/
+*.user
+*.userprefs
+*.suo
+*.cache
+*.pidb
+*.resources
+test-results/
+
+# NuGet
+packages/
+*.nupkg
+!TrueMetrics.Xamarin.Android.1.5.3.nupkg
+*.snupkg
+project.lock.json
+*.nuget.props
+*.nuget.targets
+
+# Android
+*.class
+*.jar
+!Jars/**/*.jar
+!Aars/**/*.aar
+local.properties
+*.keystore
+*.jks
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Xamarin
+Resource.designer.cs
+*.designer.cs
+mono_crash.*
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*~
+
+# IDE-specific
+.idea/
+*.sln.docstates
+_ReSharper*/
+*.resharper
+*.dotCover
+
+# Generated files
+GeneratedFiles/
+generated/
+
+# Binding specific
+*.api.xml
+*.map
+*.generated.cs

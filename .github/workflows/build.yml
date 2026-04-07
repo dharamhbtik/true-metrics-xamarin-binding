@@ -49,9 +49,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: nuget-package
-        path: |
-          TrueMetrics.Xamarin.Android/bin/Release/*.nupkg
-          TrueMetrics.Xamarin.Android/bin/Release/*.dll
+        path: TrueMetrics.Xamarin.Android/bin/Release/*.nupkg
           
     - name: Create Release
       if: startsWith(github.ref, 'refs/tags/v')

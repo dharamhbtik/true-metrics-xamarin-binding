@@ -60,21 +60,21 @@ When you install this NuGet package, only these minimal dependencies will be aut
 
 | Package | Version | Purpose |
 |---------|---------|---------|
+| `Xamarin.Kotlin.StdLib` | 1.9.0+ | Kotlin standard library (required for kotlin.uuid.Uuid) |
 | `Xamarin.GooglePlayServices.Location` | 118.0.0.1 | GPS location services |
 | `Xamarin.AndroidX.Core` | 1.9.0.1 | Required for persistent notifications |
 
-**Note**: These dependencies will be automatically installed by NuGet Package Manager.
+**Note**: These dependencies will be automatically installed. **Important**: You must use Kotlin stdlib 1.8+ for `kotlin.uuid.Uuid` support.
 
-**All Runtime Dependencies Embedded in DLL**: 
-- ✅ **Kotlin Stdlib 1.9.24** (includes kotlin.uuid.Uuid support)
+**SDK-Specific Dependencies (Embedded in DLL)**: 
 - ✅ **Kotlinx Coroutines Core 1.7.3** 
-- ✅ **Kotlinx Serialization 1.6.3** (JSON serialization for Ktor)
+- ✅ **Kotlinx Serialization 1.6.3** (JSON for Ktor)
 - ✅ **SLF4J API 2.0.9** (logging facade)
 - ✅ **Koin DI 4.1.1** (dependency injection)
 - ✅ **Ktor Client 3.3.0** (HTTP client)
 - ✅ **Timber 5.0.1** (logging)
 
-**Zero external dependencies** - All classes compiled directly into the binding DLL. No more `NoClassDefFoundError`!
+These SDK-specific dependencies are compiled directly into the binding DLL and won't conflict with your project.
 
 ---
 

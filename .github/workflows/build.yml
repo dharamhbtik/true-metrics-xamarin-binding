@@ -43,7 +43,8 @@ jobs:
       run: msbuild TrueMetrics.Xamarin.Android/TrueMetrics.Xamarin.Android.csproj /p:Configuration=Release /p:TargetFrameworkVersion=v13.0 /p:PackageVersion=${{ env.PACKAGE_VERSION }}
           
     - name: Pack NuGet package
-      run: msbuild TrueMetrics.Xamarin.Android/TrueMetrics.Xamarin.Android.csproj /t:Pack /p:Configuration=Release /p:PackageVersion=${{ env.PACKAGE_VERSION }} /p:NuspecFile=TrueMetrics.Xamarin.Android.nuspec
+      run: |
+        nuget pack TrueMetrics.Xamarin.Android/TrueMetrics.Xamarin.Android.nuspec -OutputDirectory TrueMetrics.Xamarin.Android/bin/Release -Version ${{ env.PACKAGE_VERSION }} -Properties Configuration=Release
           
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4

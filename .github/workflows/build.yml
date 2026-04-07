@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 env:
-  PACKAGE_VERSION: '1.5.4'
+  PACKAGE_VERSION: '1.5.5'
 
 jobs:
   build:

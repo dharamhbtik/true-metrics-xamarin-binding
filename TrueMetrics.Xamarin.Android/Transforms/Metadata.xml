@@ -243,4 +243,40 @@
   <remove-node path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/method[contains(@name,'-')]" />
   <remove-node path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='Status']/method[contains(@name,'-')]" />
 
+  <!-- ============================================================ -->
+  <!-- SECTION 14: Fix CS0108 warnings - _members hiding inherited member -->
+  <!-- ============================================================ -->
+  
+  <!-- Fix Status._members hiding warnings in engine.state.Status subclasses -->
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.engine.state']/class[@name='Status.Error']/field[@name='_members']" name="managedName">ErrorMembers</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.engine.state']/class[@name='Status.DelayedStart']/field[@name='_members']" name="managedName">DelayedStartMembers</attr>
+  <attr path="/api/package[@name='io.truemetrics.truemetricssdk.engine.state']/class[@name='Status.AskForPermissions']/field[@name='_members']" name="managedName">AskForPermissionsMembers</attr>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 15: Remove duplicate Companion objects causing warnings -->
+  <!-- ============================================================ -->
+  
+  <!-- Remove duplicate Companion from StandardMetadata -->
+  <remove-node path="/api/package[@name='io.truemetrics.truemetricssdk.metadata']/class[@name='StandardMetadata']/class[@name='Companion']" />
+  
+  <!-- Remove duplicate Companion from Configuration -->
+  <remove-node path="/api/package[@name='io.truemetrics.truemetricssdk.engine.configuration.domain.model']/class[@name='Configuration']/class[@name='Companion']" />
+  
+  <!-- Remove duplicate Companion from SdkConfiguration - only keep the one we renamed -->
+  <remove-node path="/api/package[@name='io.truemetrics.truemetricssdk.config']/class[@name='SdkConfiguration']/class[@name='Companion']" />
+  
+  <!-- Remove duplicate Companion from TruemetricsSdk - only keep the one we renamed -->
+  <remove-node path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/class[@name='Companion']" />
+  
+  <!-- ============================================================ -->
+  <!-- SECTION 16: Fix duplicate method/field warnings in TruemetricsSdk -->
+  <!-- ============================================================ -->
+  
+  <!-- Remove conflicting synthetic field 'A' -->
+  <remove-node path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/field[@name='A']" />
+  
+  <!-- Remove or rename internal service fields causing unexpected type warnings -->
+  <remove-node path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/field[@name='truemetricsManagerService']" />
+  <remove-node path="/api/package[@name='io.truemetrics.truemetricssdk']/class[@name='TruemetricsSdk']/field[@name='metadataTemplateManager']" />
+
 </metadata>

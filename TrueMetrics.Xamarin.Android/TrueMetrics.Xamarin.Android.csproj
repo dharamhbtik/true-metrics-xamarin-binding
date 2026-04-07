@@ -20,7 +20,7 @@
     <!-- NuGet Package Configuration -->
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>TrueMetrics.Xamarin.Android</PackageId>
-    <PackageVersion>1.5.4</PackageVersion>
+    <PackageVersion>1.5.5</PackageVersion>
     <Authors>TrueMetrics</Authors>
     <Company>TrueMetrics</Company>
     <Description>Xamarin.Android binding for TrueMetrics SDK 1.5.0 - sensor data collection for last-mile delivery applications.</Description>

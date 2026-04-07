@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>TrueMetrics.Xamarin.Android</id>
-    <version>1.5.4</version>
+    <version>1.5.5</version>
     <title>TrueMetrics SDK for Xamarin Android</title>
     <authors>TrueMetrics</authors>
     <owners>TrueMetrics</owners>
@@ -25,8 +25,13 @@
       - Configurable recording parameters
     </description>
     <releaseNotes>
-      Version 1.5.4 - Added persistent notification support for background recording
-      - Added TrueMetricsNotificationFactory for foreground service notifications
+      Version 1.5.5 - Fixed build warnings and binding issues
+      - Fixed CS0108 warnings for Status._members hiding inherited members
+      - Fixed duplicate nested type name warnings by removing duplicate Companion objects
+      - Fixed unexpected field type warnings in TruemetricsSdk
+      - Version 1.5.4 changes:
+        - Added persistent notification support for background recording
+        - Added TrueMetricsNotificationFactory for foreground service notifications
       - Added TrueMetricsNotificationHelper for notification channel management
       - Added InitializeWithNotification() method for easy setup
       - Added Xamarin.AndroidX.Core dependency for NotificationCompat

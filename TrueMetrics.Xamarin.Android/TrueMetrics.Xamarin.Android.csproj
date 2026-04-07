@@ -20,7 +20,7 @@
     <!-- NuGet Package Configuration -->
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>TrueMetrics.Xamarin.Android</PackageId>
-    <PackageVersion>1.5.9</PackageVersion>
+    <PackageVersion>1.6.0</PackageVersion>
     <Authors>TrueMetrics</Authors>
     <Company>TrueMetrics</Company>
     <Description>Xamarin.Android binding for TrueMetrics SDK 1.5.0 - sensor data collection for last-mile delivery applications. Includes Timber logging dependency.</Description>
@@ -80,13 +80,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <!-- Minimal dependencies - SDK embeds other libraries internally -->
-    <PackageReference Include="Xamarin.Kotlin.StdLib">
-      <Version>1.7.10</Version>
-    </PackageReference>
-    <PackageReference Include="Xamarin.KotlinX.Coroutines.Android">
-      <Version>1.6.4</Version>
-    </PackageReference>
+    <!-- Minimal dependencies - SDK embeds Kotlin libraries internally -->
     <PackageReference Include="Xamarin.GooglePlayServices.Location">
       <Version>118.0.0.1</Version>
     </PackageReference>
@@ -95,8 +89,19 @@
     </PackageReference>
   </ItemGroup>
   
-  <!-- Embedded JARs for dependencies without Xamarin bindings -->
+  <!-- Embedded JARs for all dependencies (no external NuGet packages needed) -->
   <ItemGroup>
+    <!-- Kotlin Standard Library - Embedded to ensure compatibility -->
+    <EmbeddedReferenceJar Include="Jars\kotlin-stdlib-1.9.24.jar" />
+    <EmbeddedReferenceJar Include="Jars\kotlinx-coroutines-core-1.7.3.jar" />
+    
+    <!-- Kotlin Serialization - Required by Ktor -->
+    <EmbeddedReferenceJar Include="Jars\kotlinx-serialization-core-1.6.3.jar" />
+    <EmbeddedReferenceJar Include="Jars\kotlinx-serialization-json-1.6.3.jar" />
+    
+    <!-- SLF4J - Logging facade required by Ktor -->
+    <EmbeddedReferenceJar Include="Jars\slf4j-api-2.0.9.jar" />
+    
     <!-- Ktor Client - All embedded directly in binding DLL -->
     <EmbeddedReferenceJar Include="Jars\ktor\ktor-client-core-3.3.0.jar" />
     <EmbeddedReferenceJar Include="Jars\ktor\ktor-client-android-3.3.0.jar" />

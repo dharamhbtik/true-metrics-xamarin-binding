@@ -67,7 +67,7 @@ When you install this NuGet package, the following dependencies will be automati
 
 **Note**: These dependencies will be automatically installed by NuGet Package Manager when you add `TrueMetrics.Xamarin.Android`.
 
-**Timber Logging**: ✅ Timber 5.0.1 is now **embedded directly in the binding DLL** - no manual setup required!
+**All Runtime Dependencies Embedded**: ✅ Timber 5.0.1, Koin 4.1.1, and Ktor 3.3.0 are now **embedded directly in the binding DLL** - no manual setup required! This fixes all `Java.Lang.NoClassDefFoundError` runtime exceptions.
 
 ---
 

@@ -35,6 +35,14 @@
     </releaseNotes>
     <copyright>Copyright © TrueMetrics 2024</copyright>
     <tags>xamarin android truemetrics sensor binding last-mile delivery logistics tracking</tags>
+    <dependencies>
+      <group targetFramework="monoandroid13.0">
+        <dependency id="Xamarin.Kotlin.StdLib" version="1.7.10" />
+        <dependency id="Xamarin.KotlinX.Coroutines.Android" version="1.6.4" />
+        <dependency id="Xamarin.GooglePlayServices.Location" version="118.0.0.1" />
+        <dependency id="Xamarin.AndroidX.Core" version="1.9.0.1" />
+      </group>
+    </dependencies>
   </metadata>
   <files>
     <!-- Reference assemblies -->

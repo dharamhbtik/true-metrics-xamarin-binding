@@ -13,7 +13,7 @@ env:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: windows-latest
     
     steps:
     - name: Checkout repository
@@ -24,6 +24,9 @@ jobs:
       with:
         dotnet-version: '8.0.x'
         
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+      
     - name: Setup Java
       uses: actions/setup-java@v4
       with:
@@ -31,39 +34,16 @@ jobs:
         distribution: 'microsoft'
         
     - name: Install Xamarin.Android workloads
-      run: |
-        sudo dotnet workload install android
+      run: dotnet workload install android
         
-    - name: Install Mono (includes MSBuild)
-      run: |
-        brew install mono
-        # Check where msbuild is installed
-        ls -la /opt/homebrew/bin/msbuild || true
-        # Ensure msbuild is accessible
-        export PATH="/opt/homebrew/bin:$PATH"
-        msbuild --version || true
-        
-    - name: Restore packages with MSBuild
-      run: |
-        export PATH="/opt/homebrew/bin:$PATH"
-        msbuild TrueMetrics.Xamarin.sln /t:Restore /p:Configuration=Release
+    - name: Restore packages
+      run: msbuild TrueMetrics.Xamarin.sln /t:Restore /p:Configuration=Release
         
     - name: Build project
-      run: |
-        export PATH="/opt/homebrew/bin:$PATH"
-        msbuild TrueMetrics.Xamarin.Android/TrueMetrics.Xamarin.Android.csproj \
-          /p:Configuration=Release \
-          /p:TargetFrameworkVersion=v13.0 \
-          /p:PackageVersion=${{ env.PACKAGE_VERSION }}
+      run: msbuild TrueMetrics.Xamarin.Android/TrueMetrics.Xamarin.Android.csproj /p:Configuration=Release /p:TargetFrameworkVersion=v13.0 /p:PackageVersion=${{ env.PACKAGE_VERSION }}
           
-    - name: Pack NuGet package with MSBuild
-      run: |
-        export PATH="/opt/homebrew/bin:$PATH"
-        msbuild TrueMetrics.Xamarin.Android/TrueMetrics.Xamarin.Android.csproj \
-          /t:Pack \
-          /p:Configuration=Release \
-          /p:PackageVersion=${{ env.PACKAGE_VERSION }} \
-          /p:NuspecFile=TrueMetrics.Xamarin.Android.nuspec
+    - name: Pack NuGet package
+      run: msbuild TrueMetrics.Xamarin.Android/TrueMetrics.Xamarin.Android.csproj /t:Pack /p:Configuration=Release /p:PackageVersion=${{ env.PACKAGE_VERSION }} /p:NuspecFile=TrueMetrics.Xamarin.Android.nuspec
           
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
@@ -89,12 +69,10 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/v')
       env:
         NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+      shell: pwsh
       run: |
-        if [ -n "$NUGET_API_KEY" ]; then
-          dotnet nuget push TrueMetrics.Xamarin.Android/bin/Release/*.nupkg \
-            --api-key $NUGET_API_KEY \
-            --source https://api.nuget.org/v3/index.json \
-            --skip-duplicate
-        else
-          echo "Skipping NuGet publish - NUGET_API_KEY not set"
-        fi
+        if ($env:NUGET_API_KEY) {
+          dotnet nuget push TrueMetrics.Xamarin.Android/bin/Release/*.nupkg --api-key $env:NUGET_API_KEY --source https://api.nuget.org/v3/index.json --skip-duplicate
+        } else {
+          Write-Host "Skipping NuGet publish - NUGET_API_KEY not set"
+        }

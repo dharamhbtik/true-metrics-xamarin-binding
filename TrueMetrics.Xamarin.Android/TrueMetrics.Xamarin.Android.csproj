@@ -20,7 +20,7 @@
     <!-- NuGet Package Configuration -->
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>TrueMetrics.Xamarin.Android</PackageId>
-    <PackageVersion>1.5.8</PackageVersion>
+    <PackageVersion>1.5.9</PackageVersion>
     <Authors>TrueMetrics</Authors>
     <Company>TrueMetrics</Company>
     <Description>Xamarin.Android binding for TrueMetrics SDK 1.5.0 - sensor data collection for last-mile delivery applications. Includes Timber logging dependency.</Description>
@@ -97,25 +97,24 @@
   
   <!-- Embedded JARs for dependencies without Xamarin bindings -->
   <ItemGroup>
-    <!-- Ktor Client - No official Xamarin binding available -->
-    <EmbeddedReferenceJar Include="Jars\ktor\ktor-client-core-3.3.0.jar" Condition="Exists('Jars\ktor\ktor-client-core-3.3.0.jar')" />
-    <EmbeddedReferenceJar Include="Jars\ktor\ktor-client-android-3.3.0.jar" Condition="Exists('Jars\ktor\ktor-client-android-3.3.0.jar')" />
-    <EmbeddedReferenceJar Include="Jars\ktor\ktor-client-content-negotiation-3.3.0.jar" Condition="Exists('Jars\ktor\ktor-client-content-negotiation-3.3.0.jar')" />
-    <EmbeddedReferenceJar Include="Jars\ktor\ktor-client-logging-jvm-3.3.0.jar" Condition="Exists('Jars\ktor\ktor-client-logging-jvm-3.3.0.jar')" />
-    <EmbeddedReferenceJar Include="Jars\ktor\ktor-client-encoding-3.3.0.jar" Condition="Exists('Jars\ktor\ktor-client-encoding-3.3.0.jar')" />
-    <EmbeddedReferenceJar Include="Jars\ktor\ktor-serialization-kotlinx-json-3.3.0.jar" Condition="Exists('Jars\ktor\ktor-serialization-kotlinx-json-3.3.0.jar')" />
-    <EmbeddedReferenceJar Include="Jars\ktor\ktor-serialization-3.3.0.jar" Condition="Exists('Jars\ktor\ktor-serialization-3.3.0.jar')" />
-    <EmbeddedReferenceJar Include="Jars\ktor\ktor-client-okhttp-3.3.0.jar" Condition="Exists('Jars\ktor\ktor-client-okhttp-3.3.0.jar')" />
-    <EmbeddedReferenceJar Include="Jars\ktor\ktor-http-3.3.0.jar" Condition="Exists('Jars\ktor\ktor-http-3.3.0.jar')" />
-    <EmbeddedReferenceJar Include="Jars\ktor\ktor-utils-3.3.0.jar" Condition="Exists('Jars\ktor\ktor-utils-3.3.0.jar')" />
-    <EmbeddedReferenceJar Include="Jars\ktor\ktor-io-3.3.0.jar" Condition="Exists('Jars\ktor\ktor-io-3.3.0.jar')" />
-    <EmbeddedReferenceJar Include="Jars\ktor\ktor-events-3.3.0.jar" Condition="Exists('Jars\ktor\ktor-events-3.3.0.jar')" />
-    <EmbeddedReferenceJar Include="Jars\ktor\ktor-websockets-3.3.0.jar" Condition="Exists('Jars\ktor\ktor-websockets-3.3.0.jar')" />
+    <!-- Ktor Client - All embedded directly in binding DLL -->
+    <EmbeddedReferenceJar Include="Jars\ktor\ktor-client-core-3.3.0.jar" />
+    <EmbeddedReferenceJar Include="Jars\ktor\ktor-client-android-3.3.0.jar" />
+    <EmbeddedReferenceJar Include="Jars\ktor\ktor-client-content-negotiation-3.3.0.jar" />
+    <EmbeddedReferenceJar Include="Jars\ktor\ktor-client-logging-jvm-3.3.0.jar" />
+    <EmbeddedReferenceJar Include="Jars\ktor\ktor-client-encoding-3.3.0.jar" />
+    <EmbeddedReferenceJar Include="Jars\ktor\ktor-serialization-kotlinx-json-3.3.0.jar" />
+    <EmbeddedReferenceJar Include="Jars\ktor\ktor-serialization-3.3.0.jar" />
+    <EmbeddedReferenceJar Include="Jars\ktor\ktor-client-okhttp-3.3.0.jar" />
+    <EmbeddedReferenceJar Include="Jars\ktor\ktor-http-3.3.0.jar" />
+    <EmbeddedReferenceJar Include="Jars\ktor\ktor-utils-3.3.0.jar" />
+    <EmbeddedReferenceJar Include="Jars\ktor\ktor-io-3.3.0.jar" />
+    <EmbeddedReferenceJar Include="Jars\ktor\ktor-events-3.3.0.jar" />
+    <EmbeddedReferenceJar Include="Jars\ktor\ktor-websockets-3.3.0.jar" />
     
-    <!-- Koin Dependency Injection - No official Xamarin binding -->
-    <EmbeddedReferenceJar Include="Jars\koin\koin-core-4.1.1.jar" Condition="Exists('Jars\koin\koin-core-4.1.1.jar')" />
-    <EmbeddedReferenceJar Include="Jars\koin\koin-core-jvm-4.1.1.jar" Condition="Exists('Jars\koin\koin-core-jvm-4.1.1.jar')" />
-    <EmbeddedReferenceJar Include="Jars\koin\koin-android-4.1.1.aar" Condition="Exists('Jars\koin\koin-android-4.1.1.aar')" />
+    <!-- Koin Dependency Injection - All embedded directly in binding DLL -->
+    <EmbeddedReferenceJar Include="Jars\koin\koin-core-4.1.1.jar" />
+    <EmbeddedReferenceJar Include="Jars\koin\koin-core-jvm-4.1.1.jar" />
     
     <!-- Timber Logging - Embedded directly in binding DLL -->
     <EmbeddedReferenceJar Include="Jars\timber\timber-5.0.1.jar" />

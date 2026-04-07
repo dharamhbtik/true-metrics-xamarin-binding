@@ -35,6 +35,9 @@ project.lock.json
 *.class
 *.jar
 !**/timber-5.0.1.jar
+!**/koin-*.jar
+!**/koin-*.aar
+!**/ktor-*.jar
 !Jars/**/*.jar
 !Aars/**/*.aar
 local.properties

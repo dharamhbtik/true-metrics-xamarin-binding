@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>TrueMetrics.Xamarin.Android</id>
-    <version>1.5.8</version>
+    <version>1.5.9</version>
     <title>TrueMetrics SDK for Xamarin Android</title>
     <authors>TrueMetrics</authors>
     <owners>TrueMetrics</owners>
@@ -25,11 +25,14 @@
       - Configurable recording parameters
     </description>
     <releaseNotes>
-      Version 1.5.8 - PERMANENT FIX: Embedded Timber classes directly in binding DLL
-      - Converted Timber 5.0.1 AAR to JAR and embedded via EmbeddedReferenceJar
-      - Timber classes now compiled directly into TrueMetrics.Xamarin.Android.dll
-      - This ensures Timber is always available at runtime without external dependencies
-      - Fixes Java.Lang.NoClassDefFoundError: Failed resolution of: Ltimber/log/Timber
+      Version 1.5.9 - EMBEDDED ALL RUNTIME DEPENDENCIES (Permanent Fix)
+      - Embedded Koin DI 4.1.1 JARs directly in binding DLL (fixes NoClassDefFoundError for KoinApplicationKt)
+      - Embedded Ktor Client 3.3.0 JARs directly in binding DLL (fixes potential runtime errors)
+      - All dependencies (Timber, Koin, Ktor) now compiled into TrueMetrics.Xamarin.Android.dll
+      - No external NuGet packages needed for these dependencies
+      - Fixes all Java.Lang.NoClassDefFoundError runtime exceptions
+      - Version 1.5.8 changes:
+        - Embedded Timber 5.0.1 classes directly in binding DLL
       - Version 1.5.7 changes:
         - Attempted to embed Timber AAR (did not work at runtime)
       - Version 1.5.6 changes:

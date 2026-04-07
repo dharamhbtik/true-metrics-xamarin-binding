@@ -65,7 +65,13 @@ When you install this NuGet package, the following dependencies will be automati
 | `Xamarin.GooglePlayServices.Location` | 118.0.0.1 | GPS location services |
 | `Xamarin.AndroidX.Core` | 1.9.0.1 | Required for persistent notifications |
 
-**Note**: These dependencies will be automatically installed by NuGet Package Manager when you add `TrueMetrics.Xamarin.Android`.
+**You must also manually add this dependency** (required by the SDK at runtime):
+
+```xml
+<PackageReference Include="Xamarin.JakeWharton.Timber" Version="4.7.1" />
+```
+
+If you get `Java.Lang.NoClassDefFoundError: Failed resolution of: Ltimber/log/Timber`, install the Timber package above.
 
 ---
 

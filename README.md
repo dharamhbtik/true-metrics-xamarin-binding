@@ -61,20 +61,20 @@ When you install this NuGet package, only these minimal dependencies will be aut
 | Package | Version | Purpose |
 |---------|---------|---------|
 | `Xamarin.Kotlin.StdLib` | 1.9.0+ | Kotlin standard library (required for kotlin.uuid.Uuid) |
+| `Xamarin.KotlinX.Coroutines.Android` | 1.7.3+ | Kotlin coroutines support |
 | `Xamarin.GooglePlayServices.Location` | 118.0.0.1 | GPS location services |
 | `Xamarin.AndroidX.Core` | 1.9.0.1 | Required for persistent notifications |
 
-**Note**: These dependencies will be automatically installed. **Important**: You must use Kotlin stdlib 1.8+ for `kotlin.uuid.Uuid` support.
+**Note**: These dependencies will be automatically installed. **Important**: You must use Kotlin stdlib 1.9+ and Coroutines 1.7+ for full SDK compatibility.
 
 **SDK-Specific Dependencies (Embedded in DLL)**: 
-- ✅ **Kotlinx Coroutines Core 1.7.3** 
-- ✅ **Kotlinx Serialization 1.6.3** (JSON for Ktor)
+- ✅ **Kotlinx Serialization 1.6.3** (JSON for Ktor - no Xamarin package available)
 - ✅ **SLF4J API 2.0.9** (logging facade)
 - ✅ **Koin DI 4.1.1** (dependency injection)
 - ✅ **Ktor Client 3.3.0** (HTTP client)
 - ✅ **Timber 5.0.1** (logging)
 
-These SDK-specific dependencies are compiled directly into the binding DLL and won't conflict with your project.
+These SDK-specific dependencies are compiled directly into the binding DLL.
 
 ---
 

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>TrueMetrics.Xamarin.Android</id>
-    <version>1.5.6</version>
+    <version>1.5.7</version>
     <title>TrueMetrics SDK for Xamarin Android</title>
     <authors>TrueMetrics</authors>
     <owners>TrueMetrics</owners>
@@ -25,10 +25,13 @@
       - Configurable recording parameters
     </description>
     <releaseNotes>
-      Version 1.5.6 - Embedded Timber 5.0.1 AAR directly
+      Version 1.5.7 - Embedded Timber 5.0.1 AAR directly
       - Removed Xamarin.JakeWharton.Timber NuGet dependency (was causing compatibility issues)
       - Embedded Timber 5.0.1 AAR directly in binding project (matches SDK requirements)
       - Fixes Java.Lang.NoSuchFieldError for Timber$Forest
+      - Version 1.5.6 changes:
+        - Added missing Timber logging dependency
+        - Fixes Java.Lang.NoClassDefFoundError: Failed resolution of: Ltimber/log/Timber
       - Version 1.5.5 changes:
         - Fixed CS0108 warnings for Status._members hiding inherited members
         - Fixed duplicate nested type name warnings by removing duplicate Companion objects

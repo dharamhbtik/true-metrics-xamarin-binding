@@ -56,17 +56,16 @@ Add to your `.csproj`:
 
 ## Required Dependencies
 
-**IMPORTANT**: This package does not include NuGet dependencies. You must manually add these packages to your Android project:
+When you install this NuGet package, the following dependencies will be automatically added to your project:
 
-```xml
-<!-- Required for the binding -->
-<PackageReference Include="Xamarin.Kotlin.StdLib" Version="1.7.10" />
-<PackageReference Include="Xamarin.KotlinX.Coroutines.Android" Version="1.6.4" />
-<PackageReference Include="Xamarin.GooglePlayServices.Location" Version="118.0.0.1" />
+| Package | Version | Purpose |
+|---------|---------|---------|
+| `Xamarin.Kotlin.StdLib` | 1.7.10 | Kotlin standard library for Android bindings |
+| `Xamarin.KotlinX.Coroutines.Android` | 1.6.4 | Kotlin coroutines support |
+| `Xamarin.GooglePlayServices.Location` | 118.0.0.1 | GPS location services |
+| `Xamarin.AndroidX.Core` | 1.9.0.1 | Required for persistent notifications |
 
-<!-- Required for persistent notifications -->
-<PackageReference Include="Xamarin.AndroidX.Core" Version="1.9.0.1" />
-```
+**Note**: These dependencies will be automatically installed by NuGet Package Manager when you add `TrueMetrics.Xamarin.Android`.
 
 ---
 

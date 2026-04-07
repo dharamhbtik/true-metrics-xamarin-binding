@@ -118,7 +118,7 @@
     <EmbeddedReferenceJar Include="Jars\koin\koin-android-4.1.1.aar" Condition="Exists('Jars\koin\koin-android-4.1.1.aar')" />
     
     <!-- Timber Logging - Embedded directly in binding DLL -->
-    <EmbeddedReferenceJar Include="Jars\timber-5.0.1.jar" />
+    <EmbeddedReferenceJar Include="Jars\timber\timber-5.0.1.jar" />
   </ItemGroup>
   
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />

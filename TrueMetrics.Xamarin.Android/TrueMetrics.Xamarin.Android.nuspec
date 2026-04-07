@@ -25,9 +25,10 @@
       - Configurable recording parameters
     </description>
     <releaseNotes>
-      Version 1.5.6 - Added missing Timber logging dependency
-      - Added Xamarin.JakeWharton.Timber dependency (required by SDK)
-      - Fixes Java.Lang.NoClassDefFoundError: Failed resolution of: Ltimber/log/Timber
+      Version 1.5.6 - Embedded Timber 5.0.1 AAR directly
+      - Removed Xamarin.JakeWharton.Timber NuGet dependency (was causing compatibility issues)
+      - Embedded Timber 5.0.1 AAR directly in binding project (matches SDK requirements)
+      - Fixes Java.Lang.NoSuchFieldError for Timber$Forest
       - Version 1.5.5 changes:
         - Fixed CS0108 warnings for Status._members hiding inherited members
         - Fixed duplicate nested type name warnings by removing duplicate Companion objects
@@ -49,7 +50,6 @@
         <dependency id="Xamarin.KotlinX.Coroutines.Android" version="1.6.4" />
         <dependency id="Xamarin.GooglePlayServices.Location" version="118.0.0.1" />
         <dependency id="Xamarin.AndroidX.Core" version="1.9.0.1" />
-        <dependency id="Xamarin.JakeWharton.Timber" version="4.7.1" />
       </group>
     </dependencies>
   </metadata>
@@ -57,6 +57,9 @@
     <!-- Reference assemblies -->
     <file src="bin\Release\TrueMetrics.Xamarin.Android.dll" target="lib\monoandroid13.0" />
     <file src="bin\Release\TrueMetrics.Xamarin.Android.xml" target="lib\monoandroid13.0" />
+    
+    <!-- Embedded Timber AAR (required by SDK) -->
+    <file src="Jars\timber-5.0.1.aar" target="lib\monoandroid13.0" />
     
     <!-- Documentation -->
     <file src="..\README.md" target="docs" />

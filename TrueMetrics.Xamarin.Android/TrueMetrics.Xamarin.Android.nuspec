@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>TrueMetrics.Xamarin.Android</id>
-    <version>1.5.5</version>
+    <version>1.5.6</version>
     <title>TrueMetrics SDK for Xamarin Android</title>
     <authors>TrueMetrics</authors>
     <owners>TrueMetrics</owners>
@@ -25,10 +25,13 @@
       - Configurable recording parameters
     </description>
     <releaseNotes>
-      Version 1.5.5 - Fixed build warnings and binding issues
-      - Fixed CS0108 warnings for Status._members hiding inherited members
-      - Fixed duplicate nested type name warnings by removing duplicate Companion objects
-      - Fixed unexpected field type warnings in TruemetricsSdk
+      Version 1.5.6 - Added missing Timber logging dependency
+      - Added Xamarin.JakeWharton.Timber dependency (required by SDK)
+      - Fixes Java.Lang.NoClassDefFoundError: Failed resolution of: Ltimber/log/Timber
+      - Version 1.5.5 changes:
+        - Fixed CS0108 warnings for Status._members hiding inherited members
+        - Fixed duplicate nested type name warnings by removing duplicate Companion objects
+        - Fixed unexpected field type warnings in TruemetricsSdk
       - Version 1.5.4 changes:
         - Added persistent notification support for background recording
         - Added TrueMetricsNotificationFactory for foreground service notifications
@@ -46,6 +49,7 @@
         <dependency id="Xamarin.KotlinX.Coroutines.Android" version="1.6.4" />
         <dependency id="Xamarin.GooglePlayServices.Location" version="118.0.0.1" />
         <dependency id="Xamarin.AndroidX.Core" version="1.9.0.1" />
+        <dependency id="Xamarin.JakeWharton.Timber" version="5.0.1" />
       </group>
     </dependencies>
   </metadata>

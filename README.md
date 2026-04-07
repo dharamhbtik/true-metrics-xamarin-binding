@@ -593,6 +593,23 @@ TrueMetrics.Xamarin.Android/bin/Release/TrueMetrics.Xamarin.Android.1.5.4.nupkg
 - Use valid string keys/values
 - Check SDK status with `TrueMetricsHelper.Instance?.SdkStatus`
 
+### Java.Lang.NoClassDefFoundError: kotlin.uuid.Uuid
+This error occurs when your project uses an older Kotlin stdlib version (1.7.x) that doesn't include `kotlin.uuid.Uuid` (added in Kotlin 1.8.0).
+
+**Solution**: Update your project's Kotlin stdlib version:
+
+```xml
+<!-- In your Android .csproj file, ensure you have: -->
+<PackageReference Include="Xamarin.Kotlin.StdLib">
+  <Version>1.9.0</Version>
+</PackageReference>
+
+<!-- Or if using packages.config: -->
+<package id="Xamarin.Kotlin.StdLib" version="1.9.0" targetFramework="monoandroid13.0" />
+```
+
+**Note**: The TrueMetrics package already declares this dependency, but if your project explicitly references an older version, it may override it. Make sure to update or remove any explicit Kotlin stdlib references in your project.
+
 ---
 
 ## Support

@@ -56,18 +56,25 @@ Add to your `.csproj`:
 
 ## Required Dependencies
 
-When you install this NuGet package, the following dependencies will be automatically added to your project:
+When you install this NuGet package, only these minimal dependencies will be automatically added:
 
 | Package | Version | Purpose |
 |---------|---------|---------|
-| `Xamarin.Kotlin.StdLib` | 1.7.10 | Kotlin standard library for Android bindings |
-| `Xamarin.KotlinX.Coroutines.Android` | 1.6.4 | Kotlin coroutines support |
 | `Xamarin.GooglePlayServices.Location` | 118.0.0.1 | GPS location services |
 | `Xamarin.AndroidX.Core` | 1.9.0.1 | Required for persistent notifications |
 
-**Note**: These dependencies will be automatically installed by NuGet Package Manager when you add `TrueMetrics.Xamarin.Android`.
+**Note**: These dependencies will be automatically installed by NuGet Package Manager.
 
-**All Runtime Dependencies Embedded**: ✅ Timber 5.0.1, Koin 4.1.1, and Ktor 3.3.0 are now **embedded directly in the binding DLL** - no manual setup required! This fixes all `Java.Lang.NoClassDefFoundError` runtime exceptions.
+**All Runtime Dependencies Embedded in DLL**: 
+- ✅ **Kotlin Stdlib 1.9.24** (includes kotlin.uuid.Uuid support)
+- ✅ **Kotlinx Coroutines Core 1.7.3** 
+- ✅ **Kotlinx Serialization 1.6.3** (JSON serialization for Ktor)
+- ✅ **SLF4J API 2.0.9** (logging facade)
+- ✅ **Koin DI 4.1.1** (dependency injection)
+- ✅ **Ktor Client 3.3.0** (HTTP client)
+- ✅ **Timber 5.0.1** (logging)
+
+**Zero external dependencies** - All classes compiled directly into the binding DLL. No more `NoClassDefFoundError`!
 
 ---
 

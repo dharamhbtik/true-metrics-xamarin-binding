@@ -37,37 +37,29 @@ jobs:
     - name: Install Mono (includes MSBuild)
       run: |
         brew install mono
-        # Find where msbuild is actually installed
-        echo "Searching for msbuild..."
-        which msbuild || true
-        find /opt/homebrew -name "msbuild" 2>/dev/null || true
-        find /usr/local -name "msbuild" 2>/dev/null || true
-        ls -la /opt/homebrew/bin/ | grep -i mono || true
-        ls -la /usr/local/bin/ | grep -i mono || true
-        
-    - name: Setup MSBuild environment
-      run: |
-        # Export msbuild path to environment - look for actual executable script
-        MSBUILD_PATH=$(find /opt/homebrew -name "msbuild" -type f 2>/dev/null | head -1 || find /usr/local -name "msbuild" -type f 2>/dev/null | head -1 || ls /opt/homebrew/bin/msbuild 2>/dev/null || echo "/opt/homebrew/bin/msbuild")
-        echo "MSBUILD_PATH=$MSBUILD_PATH" >> $GITHUB_ENV
-        echo "Using MSBuild at: $MSBUILD_PATH"
-        ls -la "$MSBUILD_PATH" || true
-        "$MSBUILD_PATH" --version || true
+        # Check where msbuild is installed
+        ls -la /opt/homebrew/bin/msbuild || true
+        # Ensure msbuild is accessible
+        export PATH="/opt/homebrew/bin:$PATH"
+        msbuild --version || true
         
     - name: Restore packages with MSBuild
       run: |
-        ${{ env.MSBUILD_PATH }} TrueMetrics.Xamarin.sln /t:Restore /p:Configuration=Release
+        export PATH="/opt/homebrew/bin:$PATH"
+        msbuild TrueMetrics.Xamarin.sln /t:Restore /p:Configuration=Release
         
     - name: Build project
       run: |
-        /opt/homebrew/bin/msbuild TrueMetrics.Xamarin.Android/TrueMetrics.Xamarin.Android.csproj \
+        export PATH="/opt/homebrew/bin:$PATH"
+        msbuild TrueMetrics.Xamarin.Android/TrueMetrics.Xamarin.Android.csproj \
           /p:Configuration=Release \
           /p:TargetFrameworkVersion=v13.0 \
           /p:PackageVersion=${{ env.PACKAGE_VERSION }}
           
     - name: Pack NuGet package with MSBuild
       run: |
-        /opt/homebrew/bin/msbuild TrueMetrics.Xamarin.Android/TrueMetrics.Xamarin.Android.csproj \
+        export PATH="/opt/homebrew/bin:$PATH"
+        msbuild TrueMetrics.Xamarin.Android/TrueMetrics.Xamarin.Android.csproj \
           /t:Pack \
           /p:Configuration=Release \
           /p:PackageVersion=${{ env.PACKAGE_VERSION }} \

@@ -6,7 +6,7 @@ Xamarin.Android binding library for the TrueMetrics SDK 1.5.0 — a sensor data 
 
 This NuGet package provides a C# binding for the native Android TrueMetrics SDK, enabling Xamarin.Forms and .NET MAUI applications to integrate comprehensive sensor-based data collection including GPS location, accelerometer, gyroscope, and barometer readings.
 
-**Version 1.5.3** includes a comprehensive `TrueMetricsHelper` class that wraps all SDK methods for simple one-line usage.
+**Version 1.5.4** includes persistent notification support and a comprehensive `TrueMetricsHelper` class.
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ This NuGet package provides a C# binding for the native Android TrueMetrics SDK,
 
 The package is built and available at:
 ```
-/Users/dkumar/CascadeProjects/TrueMetrics.Xamarin/TrueMetrics.Xamarin.Android/bin/Release/TrueMetrics.Xamarin.Android.1.5.3.nupkg
+/Users/dkumar/CascadeProjects/TrueMetrics.Xamarin/TrueMetrics.Xamarin.Android/bin/Release/TrueMetrics.Xamarin.Android.1.5.4.nupkg
 ```
 
 Add a local NuGet source:
@@ -32,7 +32,7 @@ nuget sources Add -Name "TrueMetricsLocal" -Source "/Users/dkumar/CascadeProject
 
 Install in your Android project only:
 ```powershell
-Install-Package TrueMetrics.Xamarin.Android -Version 1.5.3 -Source TrueMetricsLocal
+Install-Package TrueMetrics.Xamarin.Android -Version 1.5.4 -Source TrueMetricsLocal
 ```
 
 ### Option 2: Direct DLL Reference
@@ -49,7 +49,23 @@ Add to your `.csproj`:
 ### Option 3: PackageReference
 
 ```xml
-<PackageReference Include="TrueMetrics.Xamarin.Android" Version="1.5.3" />
+<PackageReference Include="TrueMetrics.Xamarin.Android" Version="1.5.4" />
+```
+
+---
+
+## Required Dependencies
+
+**IMPORTANT**: This package does not include NuGet dependencies. You must manually add these packages to your Android project:
+
+```xml
+<!-- Required for the binding -->
+<PackageReference Include="Xamarin.Kotlin.StdLib" Version="1.7.10" />
+<PackageReference Include="Xamarin.KotlinX.Coroutines.Android" Version="1.6.4" />
+<PackageReference Include="Xamarin.GooglePlayServices.Location" Version="118.0.0.1" />
+
+<!-- Required for persistent notifications -->
+<PackageReference Include="Xamarin.AndroidX.Core" Version="1.9.0.1" />
 ```
 
 ---
@@ -539,7 +555,7 @@ nuget pack TrueMetrics.Xamarin.Android/TrueMetrics.Xamarin.Android.nuspec \
 
 Output:
 ```
-TrueMetrics.Xamarin.Android/bin/Release/TrueMetrics.Xamarin.Android.1.5.3.nupkg
+TrueMetrics.Xamarin.Android/bin/Release/TrueMetrics.Xamarin.Android.1.5.4.nupkg
 ```
 
 ---
@@ -575,13 +591,20 @@ TrueMetrics.Xamarin.Android/bin/Release/TrueMetrics.Xamarin.Android.1.5.3.nupkg
 
 - **TrueMetrics Documentation**: https://docs.truemetrics.io
 - **GitHub Issues**: https://github.com/TRUE-Metrics-io/truemetrics_android_SDK/issues
-- **API Version**: 1.5.0 (AAR), 1.5.3 (Xamarin Binding)
+- **API Version**: 1.5.0 (AAR), 1.5.4 (Xamarin Binding)
 
 ## License
 
 MIT License - See LICENSE file for details.
 
 ## Changelog
+
+### 1.5.4
+- Added persistent notification support for background recording
+- Added `TrueMetricsNotificationBuilder` for foreground service notifications
+- Added `TrueMetricsNotificationHelper` for notification channel management
+- Added `InitializeWithNotification()` method for easy setup with notifications
+- GitHub Actions CI/CD workflow for automated builds and releases
 
 ### 1.5.3
 - Added comprehensive `TrueMetricsHelper` static class

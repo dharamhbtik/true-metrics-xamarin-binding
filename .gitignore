@@ -34,6 +34,7 @@ project.lock.json
 # Android
 *.class
 *.jar
+!**/timber-5.0.1.jar
 !Jars/**/*.jar
 !Aars/**/*.aar
 local.properties

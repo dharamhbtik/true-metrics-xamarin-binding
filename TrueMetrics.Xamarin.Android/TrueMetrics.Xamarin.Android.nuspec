@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>TrueMetrics.Xamarin.Android</id>
-    <version>1.6.1</version>
+    <version>1.6.2</version>
     <title>TrueMetrics SDK for Xamarin Android</title>
     <authors>TrueMetrics</authors>
     <owners>TrueMetrics</owners>
@@ -25,20 +25,20 @@
       - Configurable recording parameters
     </description>
     <releaseNotes>
-      Version 1.6.1 - FIX: Remove duplicate Kotlin stdlib to prevent build conflicts
-      - Removed embedded kotlin-stdlib-1.9.24.jar (was conflicting with user's Kotlin stdlib)
-      - Added Xamarin.Kotlin.StdLib 1.9.0 as NuGet dependency instead
-      - User MUST have Kotlin stdlib 1.8+ in their project for kotlin.uuid.Uuid support
-      - All other dependencies remain embedded (coroutines, serialization, SLF4J, Ktor, Koin, Timber)
-      - Version 1.6.0 changes:
-        - Embedded Kotlin stdlib 1.9.24, coroutines 1.7.3, serialization 1.6.3, SLF4J 2.0.9
-        - Removed Kotlin NuGet dependencies
+      Version 1.6.2 - FIX: Remove embedded coroutines to prevent build conflicts
+      - Removed embedded kotlinx-coroutines-core-1.7.3.jar (was conflicting with user's coroutines)
+      - Added Xamarin.KotlinX.Coroutines.Android 1.7.3 as NuGet dependency
+      - User MUST have both Kotlin stdlib 1.9+ and Coroutines 1.7+ in their project
+      - Keep Kotlinx Serialization embedded (no Xamarin package available)
+      - Version 1.6.1 changes:
+        - Removed embedded Kotlin stdlib, added as NuGet dependency
     </releaseNotes>
     <copyright>Copyright © TrueMetrics 2024</copyright>
     <tags>xamarin android truemetrics sensor binding last-mile delivery logistics tracking</tags>
     <dependencies>
       <group targetFramework="monoandroid13.0">
         <dependency id="Xamarin.Kotlin.StdLib" version="1.9.0" />
+        <dependency id="Xamarin.KotlinX.Coroutines.Android" version="1.7.3" />
         <dependency id="Xamarin.GooglePlayServices.Location" version="118.0.0.1" />
         <dependency id="Xamarin.AndroidX.Core" version="1.9.0.1" />
       </group>

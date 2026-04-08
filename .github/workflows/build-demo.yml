@@ -35,67 +35,63 @@ jobs:
         distribution: 'microsoft'
         java-version: '17'
         
-    - namname: Build TrueMetrics Demo
-
-on:
-  push:
-    branches: [ main, master, true_metrics_integration ]
-    paths:
-      - 'TrueMetricsDemo/**'
-      - 'TrueMetricsDemo.Droid/**'
-      - '.github/workflows/build-demo.yml'
-  pul  
-on:
-  push:
-    branches: GES  }
-            paths:
-      - 'TrueMetricsDemo/**'
-      - 'TrueMelo      - ' }      - 'TrueMetricsDemo.Dr        - '.github/workflows/build-    pull_request:
-    branches: [ main, mas
-     branches:       paths:
-      - 'TrueMetri.s      - 'ge      - 'TrueMetricsDemo.DrCK
-env:
-  NUGET_PACKAGES: ${{ githud T  NMe
-jobs:
-mo.Droid
+    - name: Install Xamarin.Android workloads
       run: |
-        msbuild TrueMetricsDemo.Droi    runs-on: mamo    
-    steps:
-          /p:Co    - namon      uses: actions/checkout@v=A      
-    - name: Setup .NET
-kDirector      uses: actions/s
+        dotnet workload install android
+        dotnet workload install maui-android
+        
+    - name: Cache NuGet packages
+      uses: actions/cache@v4
+      with:
+        path: ${{ env.NUGET_PACKAGES }}
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+          
+    - name: Restore NuGet packages
+      run: |
+        nuget restore TrueMetrics.Xamarin.sln -PackagesDirectory ${{ env.NUGET_PACKAGES }}
+        
+    - name: Build TrueMetricsDemo.Droid
+      run: |
+        msbuild TrueMetricsDemo.Droid/TrueMetricsDemo.Droid.csproj \
+          /p:Configuration=Debug \
+          /p:Platform=AnyCPU \
+          /p:AndroidSdkDirectory=$ANDROID_SDK_ROOT \
           /restore
           
-    - n        do TrueMetricsDemo shared library
-      - n: |
-        dotnet build       with:
-        disticsDemo.cs        di          java-version Debug \
-             
-    - ne
-             - n n
-on:
-  push:
-    branchests
-      uses:  ct    brpl    paths:
-      - 'TrueMetricsDemo/**'
-      - 'TrueMemo-Build
-          - 'TrueMetricsDemo.Dret      - '.github/workflows/build-    pul  
-on:etricsDemo.Droid/bin/Debug/*.dllon:
-       T    brri         n/Debug/nets      - 'TrueMetr        retention-days: 7
-         branches: [ main, mas
-     branches:       paths:
-      - 'TrueMetri.s      - 'ge      - 'TrueMetricsD:      branchesout@v4
-            - 'TrueMetri.s        env:
-  NUGET_PACKAGES: ${{ githud T  NMe
-jobs:
-mo.Droid
-   ve  Nonjobs:
-mo.Droid
+    - name: Build TrueMetricsDemo shared library
       run: |
-       dmo.Dt format ch        msbun    steps:
-          /p:Co    - namon      uses: actionso.         ve    - name: Setup .NET
-kDirector      uses: actions/s
-         amkDirector      uses:ect          /restore
-          bu          
-    - mo    - n  ic      - n: |
-      iguration Release
+        dotnet build TrueMetricsDemo/TrueMetricsDemo.csproj \
+          --configuration Debug \
+          --no-restore
+          
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: TrueMetricsDemo-Build
+        path: |
+          TrueMetricsDemo.Droid/bin/Debug/*.apk
+          TrueMetricsDemo.Droid/bin/Debug/*.dll
+          TrueMetricsDemo/bin/Debug/netstandard2.1/*.dll
+        retention-days: 7
+        
+  code-analysis:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+        
+    - name: Run dotnet format check
+      run: |
+        dotnet format TrueMetricsDemo/TrueMetricsDemo.csproj --verify-no-changes --verbosity diagnostic || true
+        
+    - name: Build shared project
+      run: |
+        dotnet build TrueMetricsDemo/TrueMetricsDemo.csproj --configuration Release

@@ -120,8 +120,11 @@
     <PackageReference Include="Prism.Plugin.Popups" Version="8.0.76" />
     <PackageReference Include="DryIoc.dll" Version="4.8.6" />
     
-    <!-- TrueMetrics SDK -->
-    <PackageReference Include="TrueMetrics.Xamarin.Android" Version="1.6.2" />
+    <!-- TrueMetrics SDK - Local Project Reference -->
+    <ProjectReference Include="..\TrueMetrics.Xamarin.Android\TrueMetrics.Xamarin.Android.csproj">
+      <Project>{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}</Project>
+      <Name>TrueMetrics.Xamarin.Android</Name>
+    </ProjectReference>
     
     <!-- Kotlin -->
     <PackageReference Include="Xamarin.Kotlin.StdLib" Version="1.9.0" />

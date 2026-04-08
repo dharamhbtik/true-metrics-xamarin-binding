@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TrueMetrics Demo</string>
+    <string name="title_main">TrueMetrics SDK Demo</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_clear_logs">Clear Logs</string>
+    <string name="action_export_logs">Export Logs</string>
+    <string name="action_test_all">Test All Methods</string>
+</resources>

@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:local="clr-namespace:TrueMetricsDemo.Views"
+             x:Class="TrueMetricsDemo.Views.MainPage"
+             Title="TrueMetrics SDK Demo">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="SectionHeaderStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
+                <Setter Property="Margin" Value="0,15,0,5" />
+            </Style>
+            
+            <Style x:Key="EntryStyle" TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="TextColor" Value="{StaticResource TextColor}" />
+                <Setter Property="Margin" Value="0,2" />
+            </Style>
+            
+            <Style x:Key="SmallButtonStyle" TargetType="Button">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="HeightRequest" Value="36" />
+                <Setter Property="CornerRadius" Value="4" />
+                <Setter Property="Margin" Value="2" />
+            </Style>
+            
+            <Style x:Key="PrimarySmallButtonStyle" TargetType="Button" BasedOn="{StaticResource SmallButtonStyle}">
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+            
+            <Style x:Key="ActionSmallButtonStyle" TargetType="Button" BasedOn="{StaticResource SmallButtonStyle}">
+                <Setter Property="BackgroundColor" Value="{StaticResource AccentColor}" />
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+            
+            <Style x:Key="LogEntryInfoStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="11" />
+                <Setter Property="TextColor" Value="#2196F3" />
+            </Style>
+            
+            <Style x:Key="LogEntryErrorStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="11" />
+                <Setter Property="TextColor" Value="#F44336" />
+            </Style>
+            
+            <Style x:Key="LogEntrySuccessStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="11" />
+                <Setter Property="TextColor" Value="#4CAF50" />
+            </Style>
+            
+            <Style x:Key="LogEntryWarningStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="11" />
+                <Setter Property="TextColor" Value="#FF9800" />
+            </Style>
+            
+            <Style x:Key="LogEntrySdkStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="11" />
+                <Setter Property="TextColor" Value="#9C27B0" />
+                <Setter Property="FontAttributes" Value="Italic" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Status Bar -->
+        <Frame Grid.Row="0" 
+               BackgroundColor="{StaticResource PrimaryColor}" 
+               Padding="10,5" 
+               CornerRadius="0">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="SDK Status:" 
+                       TextColor="White" 
+                       FontAttributes="Bold" />
+                <Label Text="{Binding StatusMessage}" 
+                       TextColor="White" />
+                <Label Text="|" 
+                       TextColor="White" 
+                       Margin="10,0" />
+                <Label Text="Initialized:" 
+                       TextColor="White" 
+                       FontAttributes="Bold" />
+                <Label Text="{Binding IsInitialized}" 
+                       TextColor="White">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" 
+                                     Binding="{Binding IsInitialized}" 
+                                     Value="True">
+                            <Setter Property="TextColor" Value="#4CAF50" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Label" 
+                                     Binding="{Binding IsInitialized}" 
+                                     Value="False">
+                            <Setter Property="TextColor" Value="#FF9800" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+            </StackLayout>
+        </Frame>
+
+        <!-- Main Content -->
+        <ScrollView Grid.Row="1">
+            <StackLayout Padding="10" Spacing="5">
+                
+                <!-- Initialization Section -->
+                <Label Text="Initialization" Style="{StaticResource SectionHeaderStyle}" />
+                <Grid ColumnDefinitions="*,*">
+                    <Entry Grid.Column="0" 
+                           Text="{Binding ApiKey}" 
+                           Placeholder="API Key"
+                           Style="{StaticResource EntryStyle}" />
+                    <Entry Grid.Column="1" 
+                           Text="{Binding UserId}" 
+                           Placeholder="User ID"
+                           Style="{StaticResource EntryStyle}" />
+                </Grid>
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Initialize" 
+                            Command="{Binding InitializeCommand}"
+                            IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBooleanConverter}}"
+                            Style="{StaticResource PrimarySmallButtonStyle}"
+                            HorizontalOptions="FillAndExpand" />
+                    <Button Text="Init (Custom EP)" 
+                            Command="{Binding InitializeWithEndpointCommand}"
+                            IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBooleanConverter}}"
+                            Style="{StaticResource PrimarySmallButtonStyle}"
+                            HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+                <Button Text="Reset SDK" 
+                        Command="{Binding ResetCommand}"
+                        BackgroundColor="#F44336"
+                        TextColor="White"
+                        Style="{StaticResource SmallButtonStyle}" />
+
+                <!-- Test All Button -->
+                <Button Text="🧪 TEST ALL METHODS" 
+                        Command="{Binding TestAllMethodsCommand}"
+                        IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBooleanConverter}}"
+                        BackgroundColor="#673AB7"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        HeightRequest="50"
+                        Margin="0,10" />
+
+                <!-- Events Section -->
+                <Label Text="Events &amp; Screen Views" Style="{StaticResource SectionHeaderStyle}" />
+                <Grid ColumnDefinitions="*,*">
+                    <Entry Grid.Column="0" 
+                           Text="{Binding EventName}" 
+                           Placeholder="Event Name"
+                           Style="{StaticResource EntryStyle}" />
+                    <Entry Grid.Column="1" 
+                           Text="{Binding ScreenName}" 
+                           Placeholder="Screen Name"
+                           Style="{StaticResource EntryStyle}" />
+                </Grid>
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Track Event" 
+                            Command="{Binding TrackEventCommand}"
+                            IsEnabled="{Binding IsInitialized}"
+                            Style="{StaticResource ActionSmallButtonStyle}"
+                            HorizontalOptions="FillAndExpand" />
+                    <Button Text="Track + Params" 
+                            Command="{Binding TrackEventWithParamsCommand}"
+                            IsEnabled="{Binding IsInitialized}"
+                            Style="{StaticResource ActionSmallButtonStyle}"
+                            HorizontalOptions="FillAndExpand" />
+                    <Button Text="Screen View" 
+                            Command="{Binding TrackScreenViewCommand}"
+                            IsEnabled="{Binding IsInitialized}"
+                            Style="{StaticResource ActionSmallButtonStyle}"
+                            HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+
+                <!-- User Properties Section -->
+                <Label Text="User Properties" Style="{StaticResource SectionHeaderStyle}" />
+                <Grid ColumnDefinitions="*,*">
+                    <Entry Grid.Column="0" 
+                           Text="{Binding PropertyKey}" 
+                           Placeholder="Property Key"
+                           Style="{StaticResource EntryStyle}" />
+                    <Entry Grid.Column="1" 
+                           Text="{Binding PropertyValue}" 
+                           Placeholder="Property Value"
+                           Style="{StaticResource EntryStyle}" />
+                </Grid>
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Set Property" 
+                            Command="{Binding SetUserPropertyCommand}"
+                            IsEnabled="{Binding IsInitialized}"
+                            Style="{StaticResource ActionSmallButtonStyle}"
+                            HorizontalOptions="FillAndExpand" />
+                    <Button Text="Set Multiple" 
+                            Command="{Binding SetMultiplePropertiesCommand}"
+                            IsEnabled="{Binding IsInitialized}"
+                            Style="{StaticResource ActionSmallButtonStyle}"
+                            HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+
+                <!-- Session Section -->
+                <Label Text="Session Management" Style="{StaticResource SectionHeaderStyle}" />
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Start Session" 
+                            Command="{Binding StartSessionCommand}"
+                            IsEnabled="{Binding IsInitialized}"
+                            Style="{StaticResource PrimarySmallButtonStyle}"
+                            HorizontalOptions="FillAndExpand" />
+                    <Button Text="End Session" 
+                            Command="{Binding EndSessionCommand}"
+                            IsEnabled="{Binding IsInitialized}"
+                            Style="{StaticResource PrimarySmallButtonStyle}"
+                            HorizontalOptions="FillAndExpand" />
+                    <Button Text="Get Session ID" 
+                            Command="{Binding GetSessionIdCommand}"
+                            IsEnabled="{Binding IsInitialized}"
+                            Style="{StaticResource PrimarySmallButtonStyle}"
+                            HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+
+                <!-- Exercise Section -->
+                <Label Text="Exercise Tracking" Style="{StaticResource SectionHeaderStyle}" />
+                <Grid ColumnDefinitions="*,*,*">
+                    <Entry Grid.Column="0" 
+                           Text="{Binding ExerciseType}" 
+                           Placeholder="Type"
+                           Style="{StaticResource EntryStyle}" />
+                    <Entry Grid.Column="1" 
+                           Text="{Binding ExerciseDuration}" 
+                           Placeholder="Duration (s)"
+                           Keyboard="Numeric"
+                           Style="{StaticResource EntryStyle}" />
+                    <Entry Grid.Column="2" 
+                           Text="{Binding ExerciseDistance}" 
+                           Placeholder="Distance (m)"
+                           Keyboard="Numeric"
+                           Style="{StaticResource EntryStyle}" />
+                </Grid>
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Track Exercise" 
+                            Command="{Binding TrackExerciseCommand}"
+                            IsEnabled="{Binding IsInitialized}"
+                            Style="{StaticResource ActionSmallButtonStyle}"
+                            HorizontalOptions="FillAndExpand" />
+                    <Button Text="Track + Metadata" 
+                            Command="{Binding TrackExerciseWithMetadataCommand}"
+                            IsEnabled="{Binding IsInitialized}"
+                            Style="{StaticResource ActionSmallButtonStyle}"
+                            HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+
+                <!-- Location Section -->
+                <Label Text="Location" Style="{StaticResource SectionHeaderStyle}" />
+                <Grid ColumnDefinitions="*,*,*">
+                    <Entry Grid.Column="0" 
+                           Text="{Binding Latitude}" 
+                           Placeholder="Latitude"
+                           Keyboard="Numeric"
+                           Style="{StaticResource EntryStyle}" />
+                    <Entry Grid.Column="1" 
+                           Text="{Binding Longitude}" 
+                           Placeholder="Longitude"
+                           Keyboard="Numeric"
+                           Style="{StaticResource EntryStyle}" />
+                    <Entry Grid.Column="2" 
+                           Text="{Binding LocationAccuracy}" 
+                           Placeholder="Accuracy (m)"
+                           Keyboard="Numeric"
+                           Style="{StaticResource EntryStyle}" />
+                </Grid>
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Set Location" 
+                            Command="{Binding SetLocationCommand}"
+                            IsEnabled="{Binding IsInitialized}"
+                            Style="{StaticResource ActionSmallButtonStyle}"
+                            HorizontalOptions="FillAndExpand" />
+                    <Button Text="Set + Accuracy" 
+                            Command="{Binding SetLocationWithAccuracyCommand}"
+                            IsEnabled="{Binding IsInitialized}"
+                            Style="{StaticResource ActionSmallButtonStyle}"
+                            HorizontalOptions="FillAndExpand" />
+                    <Button Text="Get Current" 
+                            Command="{Binding GetCurrentLocationCommand}"
+                            Style="{StaticResource PrimarySmallButtonStyle}"
+                            HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+
+                <!-- Debug & Flush Section -->
+                <Label Text="Debug &amp; Flush" Style="{StaticResource SectionHeaderStyle}" />
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Enable Debug" 
+                            Command="{Binding EnableDebugLoggingCommand}"
+                            IsEnabled="{Binding IsInitialized}"
+                            Style="{StaticResource PrimarySmallButtonStyle}"
+                            HorizontalOptions="FillAndExpand" />
+                    <Button Text="Disable Debug" 
+                            Command="{Binding DisableDebugLoggingCommand}"
+                            IsEnabled="{Binding IsInitialized}"
+                            Style="{StaticResource PrimarySmallButtonStyle}"
+                            HorizontalOptions="FillAndExpand" />
+                    <Button Text="Get Device Info" 
+                            Command="{Binding GetDeviceInfoCommand}"
+                            IsEnabled="{Binding IsInitialized}"
+                            Style="{StaticResource PrimarySmallButtonStyle}"
+                            HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Flush Events" 
+                            Command="{Binding FlushEventsCommand}"
+                            IsEnabled="{Binding IsInitialized}"
+                            Style="{StaticResource ActionSmallButtonStyle}"
+                            HorizontalOptions="FillAndExpand" />
+                    <Button Text="Flush Async" 
+                            Command="{Binding FlushEventsAsyncCommand}"
+                            IsEnabled="{Binding IsInitialized}"
+                            Style="{StaticResource ActionSmallButtonStyle}"
+                            HorizontalOptions="FillAndExpand" />
+                    <Button Text="Log Exception" 
+                            Command="{Binding LogExceptionCommand}"
+                            IsEnabled="{Binding IsInitialized}"
+                            BackgroundColor="#F44336"
+                            TextColor="White"
+                            Style="{StaticResource SmallButtonStyle}"
+                            HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+
+                <!-- Logs Section -->
+                <Label Text="Log Output" Style="{StaticResource SectionHeaderStyle}" />
+                <Frame BackgroundColor="#1E1E1E" 
+                       Padding="5" 
+                       CornerRadius="4"
+                       HeightRequest="250">
+                    <CollectionView ItemsSource="{Binding LogEntries}"
+                                    SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Label Text="{Binding FormattedMessage}"
+                                       Style="{StaticResource LogEntryInfoStyle}"
+                                       LineBreakMode="WordWrap">
+                                    <Label.Style>
+                                        <Binding Path="Level">
+                                            <Binding.Converter>
+                                                <local:LogLevelToStyleConverter />
+                                            </Binding.Converter>
+                                        </Binding>
+                                    </Label.Style>
+                                </Label>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Frame>
+                
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Clear Logs" 
+                            Command="{Binding ClearLogsCommand}"
+                            BackgroundColor="#757575"
+                            TextColor="White"
+                            Style="{StaticResource SmallButtonStyle}"
+                            HorizontalOptions="FillAndExpand" />
+                    <Button Text="Export Logs" 
+                            Command="{Binding ExportLogsCommand}"
+                            BackgroundColor="#4CAF50"
+                            TextColor="White"
+                            Style="{StaticResource SmallButtonStyle}"
+                            HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+
+        <!-- Bottom Busy Indicator -->
+        <Frame Grid.Row="2" 
+               BackgroundColor="{StaticResource PrimaryDarkColor}" 
+               Padding="10" 
+               CornerRadius="0"
+               IsVisible="{Binding IsBusy}">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <ActivityIndicator IsRunning="True" Color="White" />
+                <Label Text="Processing..." 
+                       TextColor="White" 
+                       VerticalOptions="Center" 
+                       Margin="10,0,0,0" />
+            </StackLayout>
+        </Frame>
+    </Grid>
+</ContentPage>

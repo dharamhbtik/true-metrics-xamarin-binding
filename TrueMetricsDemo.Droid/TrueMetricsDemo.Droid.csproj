@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D3E4F5A6-B7C8-9012-DEFA-2345678901AB}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>TrueMetricsDemo.Droid</RootNamespace>
+    <AssemblyName>TrueMetricsDemo.Droid</AssemblyName>
+    <TargetFrameworkVersion>v13.0</TargetFrameworkVersion>
+    <MonoDroidVersion>v1.0</MonoDroidVersion>
+    <AndroidApplication>True</AndroidApplication>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+    <AndroidTlsProvider>
+    </AndroidTlsProvider>
+    <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <LangVersion>latest</LangVersion>
+    <BundleAssemblies>false</BundleAssemblies>
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+    <MandroidI18n />
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <AndroidFastDeployment>false</AndroidFastDeployment>
+    <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
+    <AndroidDexTool>d8</AndroidDexTool>
+    <AndroidLinkTool></AndroidLinkTool>
+    <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
+    <AndroidUseAapt2>true</AndroidUseAapt2>
+    <AndroidSupportedAbis>arm64-v8a</AndroidSupportedAbis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AndroidLintEnabled>false</AndroidLintEnabled>
+    <AotAssemblies>false</AotAssemblies>
+    <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
+    <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
+    <LangVersion>Latest</LangVersion>
+    <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
+    <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
+    <MandroidI18n>West</MandroidI18n>
+    <AndroidDexTool>d8</AndroidDexTool>
+    <AndroidUseAapt2>true</AndroidUseAapt2>
+    <AndroidLinkTool>r8</AndroidLinkTool>
+    <ExcludeFoldersFromDeployment>ExternalScanners</ExcludeFoldersFromDeployment>
+    <EnableLLVM>true</EnableLLVM>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <BundleAssemblies>false</BundleAssemblies>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+    <AndroidLinkMode>None</AndroidLinkMode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Mono.Android.Export" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Numerics.Vectors" />
+    <Reference Include="Mono.Android" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Java.Interop" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MainActivity.cs" />
+    <Compile Include="MainApplication.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="LinkerPleaseInclude.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\AndroidManifest.xml" />
+    <None Include="Assets\AboutAssets.txt" />
+    <None Include="Resources\AboutResources.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Tabbar.axml" />
+    <AndroidResource Include="Resources\layout\Toolbar.axml" />
+    <AndroidResource Include="Resources\values\styles.xml" />
+    <AndroidResource Include="Resources\values\colors.xml" />
+    <AndroidResource Include="Resources\drawable\launchscreen.xml" />
+    <AndroidResource Include="Resources\values\strings.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TrueMetricsDemo\TrueMetricsDemo.csproj">
+      <Project>{C2D3E4F5-A6B7-8901-CDEF-123456789ABC}</Project>
+      <Name>TrueMetricsDemo</Name>
+    </ProjectReference>
+  </ItemGroup>
+  
+  <!-- Core Xamarin Packages -->
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2662" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
+    
+    <!-- Prism -->
+    <PackageReference Include="Prism.DryIoc.Forms" Version="8.1.97" />
+    <PackageReference Include="Prism.Plugin.Popups" Version="8.0.76" />
+    <PackageReference Include="DryIoc.dll" Version="4.8.6" />
+    
+    <!-- TrueMetrics SDK -->
+    <PackageReference Include="TrueMetrics.Xamarin.Android" Version="1.6.2" />
+    
+    <!-- Kotlin -->
+    <PackageReference Include="Xamarin.Kotlin.StdLib" Version="1.9.0" />
+    <PackageReference Include="Xamarin.KotlinX.Coroutines.Android" Version="1.7.3" />
+    
+    <!-- Xamarin Community -->
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.6" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="2.1.0" />
+    
+    <!-- AndroidX -->
+    <PackageReference Include="Xamarin.AndroidX.Activity" Version="1.3.1.2" />
+    <PackageReference Include="Xamarin.AndroidX.Annotation.Experimental" Version="1.3.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.3.1.3" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat.AppCompatResources" Version="1.6.1.3" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat.Resources" Version="1.1.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.Arch.Core.Common" Version="2.1.0.13" />
+    <PackageReference Include="Xamarin.AndroidX.Arch.Core.Runtime" Version="2.1.0.13" />
+    <PackageReference Include="Xamarin.AndroidX.AsyncLayoutInflater" Version="1.0.0.8" />
+    <PackageReference Include="Xamarin.AndroidX.Browser" Version="1.3.0.6" />
+    <PackageReference Include="Xamarin.AndroidX.CardView" Version="1.0.0.11" />
+    <PackageReference Include="Xamarin.AndroidX.Concurrent.Futures" Version="1.1.0.5" />
+    <PackageReference Include="Xamarin.AndroidX.ConstraintLayout" Version="2.1.1.2" />
+    <PackageReference Include="Xamarin.AndroidX.ConstraintLayout.Core" Version="1.0.1.2" />
+    <PackageReference Include="Xamarin.AndroidX.ConstraintLayout.Solver" Version="2.0.4.3" />
+    <PackageReference Include="Xamarin.AndroidX.CoordinatorLayout" Version="1.1.0.10" />
+    <PackageReference Include="Xamarin.AndroidX.Core" Version="1.6.0.5" />
+    <PackageReference Include="Xamarin.AndroidX.CursorAdapter" Version="1.0.0.10" />
+    <PackageReference Include="Xamarin.AndroidX.CustomView" Version="1.1.0.9" />
+    <PackageReference Include="Xamarin.AndroidX.DocumentFile" Version="1.0.1.10" />
+    <PackageReference Include="Xamarin.AndroidX.DrawerLayout" Version="1.1.1.5" />
+    <PackageReference Include="Xamarin.AndroidX.DynamicAnimation" Version="1.0.0.10" />
+    <PackageReference Include="Xamarin.AndroidX.Fragment" Version="1.3.6.3" />
+    <PackageReference Include="Xamarin.AndroidX.Collection.Jvm" Version="1.4.0" />
+    <PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.4.0" />
+    <PackageReference Include="Xamarin.AndroidX.Interpolator" Version="1.0.0.10" />
+    <PackageReference Include="Xamarin.AndroidX.Legacy.Support.Core.UI" Version="1.0.0.9" />
+    <PackageReference Include="Xamarin.AndroidX.Legacy.Support.Core.Utils" Version="1.0.0.10" />
+    <PackageReference Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0.8" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Common" Version="2.4.0.1" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.3.1.3" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData.Core" Version="2.3.1.3" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Runtime" Version="2.4.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.Service" Version="2.6.1.2" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.ViewModel" Version="2.3.1.3" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.ViewModelSavedState" Version="2.3.1.3" />
+    <PackageReference Include="Xamarin.AndroidX.Loader" Version="1.1.0.10" />
+    <PackageReference Include="Xamarin.AndroidX.LocalBroadcastManager" Version="1.0.0.10" />
+    <PackageReference Include="Xamarin.AndroidX.Media" Version="1.4.1" />
+    <PackageReference Include="Xamarin.AndroidX.MediaRouter" Version="1.2.5" />
+    <PackageReference Include="Xamarin.AndroidX.Migration" Version="1.0.10" />
+    <PackageReference Include="Xamarin.AndroidX.MultiDex" Version="2.0.1.8" />
+    <PackageReference Include="Xamarin.AndroidX.Navigation.Common" Version="2.3.5.3" />
+    <PackageReference Include="Xamarin.AndroidX.Navigation.Runtime" Version="2.3.5.3" />
+    <PackageReference Include="Xamarin.AndroidX.Navigation.UI" Version="2.3.5.3" />
+    <PackageReference Include="Xamarin.AndroidX.Palette" Version="1.0.0.10" />
+    <PackageReference Include="Xamarin.AndroidX.Preference" Version="1.1.1.9" />
+    <PackageReference Include="Xamarin.AndroidX.Print" Version="1.0.0.10" />
+    <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.2.1.3" />
+    <PackageReference Include="Xamarin.AndroidX.Room.Common" Version="2.5.2" />
+    <PackageReference Include="Xamarin.AndroidX.SavedState" Version="1.1.0.4" />
+    <PackageReference Include="Xamarin.AndroidX.SlidingPaneLayout" Version="1.1.0.3" />
+    <PackageReference Include="Xamarin.AndroidX.Startup.StartupRuntime" Version="1.1.1.6" />
+    <PackageReference Include="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.1.0.3" />
+    <PackageReference Include="Xamarin.AndroidX.Tracing.Tracing" Version="1.0.0.3" />
+    <PackageReference Include="Xamarin.AndroidX.Transition" Version="1.4.1.3" />
+    <PackageReference Include="Xamarin.AndroidX.VectorDrawable" Version="1.1.0.10" />
+    <PackageReference Include="Xamarin.AndroidX.VectorDrawable.Animated" Version="1.1.0.10" />
+    <PackageReference Include="Xamarin.AndroidX.VersionedParcelable" Version="1.1.1.12" />
+    <PackageReference Include="Xamarin.AndroidX.ViewPager" Version="1.0.0.10" />
+    <PackageReference Include="Xamarin.AndroidX.ViewPager2" Version="1.0.0.12" />
+    <PackageReference Include="Xamarin.Build.Download" Version="0.11.4" />
+    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.4.0.4" />
+    <PackageReference Include="Xamarin.Google.Guava.ListenableFuture" Version="1.0.0.3" />
+    <PackageReference Include="Xamarin.JavaX.Inject" Version="1.0.0.2" />
+    
+    <!-- Firebase -->
+    <PackageReference Include="Xamarin.Firebase.Analytics" Version="121.3.0.5" />
+    <PackageReference Include="Xamarin.Firebase.Crashlytics" Version="118.6.2" />
+    <PackageReference Include="Xamarin.Firebase.Annotations" Version="116.2.0.6" />
+    <PackageReference Include="Xamarin.Firebase.Common" Version="120.4.2.2" />
+    <PackageReference Include="Xamarin.Firebase.Core" Version="121.1.1.7" />
+    <PackageReference Include="Xamarin.Firebase.Components" Version="117.1.5.2" />
+    <PackageReference Include="Xamarin.Firebase.Config" Version="121.6.1" />
+    <PackageReference Include="Xamarin.Firebase.Datatransport" Version="118.2.1" />
+    <PackageReference Include="Xamarin.Firebase.Encoders" Version="117.0.0.14" />
+    <PackageReference Include="Xamarin.Firebase.Encoders.JSON" Version="118.0.1.6" />
+    <PackageReference Include="Xamarin.Firebase.Encoders.Proto" Version="116.0.0" />
+    <PackageReference Include="Xamarin.Firebase.Iid" Version="121.1.0.14" />
+    <PackageReference Include="Xamarin.Firebase.Iid.Interop" Version="117.1.0.14" />
+    <PackageReference Include="Xamarin.Firebase.Installations" Version="117.2.0.2" />
+    <PackageReference Include="Xamarin.Firebase.Installations.InterOp" Version="117.2.0.2" />
+    <PackageReference Include="Xamarin.Firebase.Measurement.Connector" Version="120.0.1.2" />
+    <PackageReference Include="Xamarin.Firebase.Messaging" Version="123.4.1" />
+    
+    <!-- Google Play Services -->
+    <PackageReference Include="Xamarin.Google.Dagger" Version="2.47.0.1" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Base" Version="118.3.0" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Basement" Version="118.3.0" />
+    <PackageReference Include="Xamarin.GooglePlayServices.CloudMessaging" Version="117.1.0.1" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Location" Version="121.1.0" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Maps" Version="117.0.1.1" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Places.PlaceReport" Version="117.0.0.1" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Stats" Version="117.0.1.3" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Tasks" Version="118.1.0" />
+    <PackageReference Include="Xamarin.Google.Android.DataTransport.TransportApi" Version="3.1.0.1" />
+    <PackageReference Include="Xamarin.Google.Android.DataTransport.TransportBackendCct" Version="3.2.0.1" />
+    <PackageReference Include="Xamarin.Google.Android.DataTransport.TransportRuntime" Version="3.2.0.1" />
+    
+    <!-- ML Kit -->
+    <PackageReference Include="Xamarin.Google.MLKit.Vision.Interfaces" Version="116.0.0" />
+    
+    <!-- Additional Dependencies -->
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Xamarin.ANRWatchDog" Version="1.4.25" />
+    <PackageReference Include="NETStandard.Library" Version="2.0.3" />
+    <PackageReference Include="System.Runtime.Loader" Version="4.3.0">
+      <ExcludeAssets>all</ExcludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+</Project>

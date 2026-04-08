@@ -1,0 +1,101 @@
+name: Build TrueMetrics Demo
+
+on:
+  push:
+    branches: [ main, master, true_metrics_integration ]
+    paths:
+      - 'TrueMetricsDemo/**'
+      - 'TrueMetricsDemo.Droid/**'
+      - '.github/workflows/build-demo.yml'
+  pull_request:
+    branches: [ main, master ]
+    paths:
+      - 'TrueMetricsDemo/**'
+      - 'TrueMetricsDemo.Droid/**'
+
+env:
+  NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+
+jobs:
+  build-android:
+    runs-on: macos-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+        
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'microsoft'
+        java-version: '17'
+        
+    - namname: Build TrueMetrics Demo
+
+on:
+  push:
+    branches: [ main, master, true_metrics_integration ]
+    paths:
+      - 'TrueMetricsDemo/**'
+      - 'TrueMetricsDemo.Droid/**'
+      - '.github/workflows/build-demo.yml'
+  pul  
+on:
+  push:
+    branches: GES  }
+            paths:
+      - 'TrueMetricsDemo/**'
+      - 'TrueMelo      - ' }      - 'TrueMetricsDemo.Dr        - '.github/workflows/build-    pull_request:
+    branches: [ main, mas
+     branches:       paths:
+      - 'TrueMetri.s      - 'ge      - 'TrueMetricsDemo.DrCK
+env:
+  NUGET_PACKAGES: ${{ githud T  NMe
+jobs:
+mo.Droid
+      run: |
+        msbuild TrueMetricsDemo.Droi    runs-on: mamo    
+    steps:
+          /p:Co    - namon      uses: actions/checkout@v=A      
+    - name: Setup .NET
+kDirector      uses: actions/s
+          /restore
+          
+    - n        do TrueMetricsDemo shared library
+      - n: |
+        dotnet build       with:
+        disticsDemo.cs        di          java-version Debug \
+             
+    - ne
+             - n n
+on:
+  push:
+    branchests
+      uses:  ct    brpl    paths:
+      - 'TrueMetricsDemo/**'
+      - 'TrueMemo-Build
+          - 'TrueMetricsDemo.Dret      - '.github/workflows/build-    pul  
+on:etricsDemo.Droid/bin/Debug/*.dllon:
+       T    brri         n/Debug/nets      - 'TrueMetr        retention-days: 7
+         branches: [ main, mas
+     branches:       paths:
+      - 'TrueMetri.s      - 'ge      - 'TrueMetricsD:      branchesout@v4
+            - 'TrueMetri.s        env:
+  NUGET_PACKAGES: ${{ githud T  NMe
+jobs:
+mo.Droid
+   ve  Nonjobs:
+mo.Droid
+      run: |
+       dmo.Dt format ch        msbun    steps:
+          /p:Co    - namon      uses: actionso.         ve    - name: Setup .NET
+kDirector      uses: actions/s
+         amkDirector      uses:ect          /restore
+          bu          
+    - mo    - n  ic      - n: |
+      iguration Release

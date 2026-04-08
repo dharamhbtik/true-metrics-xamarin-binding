@@ -1,0 +1,24 @@
+Images, layout descriptions, drawables and menus can be included in the 
+Resources folder of your application project. Each resource has a unique ID 
+assigned to it in the Resource.designer.cs file that can be referenced from 
+Android code or from Xamarin.Android.
+
+See http://developer.android.com/guide/topics/resources/providing-resources.html for more 
+details on the Android resource system and how it works.
+
+Android also supports loading resources from specific folders based on the device 
+configuration at runtime. See the following documents for more details on this:
+
+   http://developer.android.com/guide/topics/resources/providing-resources.html#AlternativeResources
+   http://developer.android.com/guide/topics/resources/providing-resources.html#table2
+   http://developer.android.com/guide/topics/resources/providing-resources.html# QualifierRules
+
+Xamarin.Android has support for displaying alternative resources based on the 
+device configuration at runtime. See the following documents for more details 
+on this:
+
+   http://developer.xamarin.com/guides/android/application_fundamentals/resources_in_android/part_1_-_android_resource_basics/
+   http://developer.xamarin.com/guides/android/application_fundamentals/resources_in_android/part_2_-_device_specific_resources/
+   http://developer.xamarin.com/guides/android/application_fundamentals/resources_in_android/part_3_-_xml_file_resources/
+   http://developer.xamarin.com/guides/android/application_fundamentals/resources_in_android/part_4_-_drawable_resources/
+   http://developer.xamarin.com/guides/android/application_fundamentals/resources_in_android/part_5_-_font_resources/
